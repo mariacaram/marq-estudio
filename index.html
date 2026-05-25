@@ -45,9 +45,13 @@
     .nav-logo img {
       height: 32px;
       width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      flex-shrink: 0;
       filter: brightness(0) invert(1);   /* blanco sobre el hero oscuro */
       transition: filter .4s ease;
     }
+    .nav-logo { flex-shrink: 0; display: flex; align-items: center; }
     #nav.scrolled .nav-logo img {
       filter: none;                       /* colores originales sobre el nav blanco */
     }
@@ -524,7 +528,6 @@
       margin-top: 28px;
       border-radius: 3px;
       overflow: hidden;
-      filter: grayscale(1) contrast(1.05) brightness(.97);
       border: 1px solid #e8e8e8;
     }
     .map-container iframe {
@@ -852,12 +855,10 @@
       </p>
       <div class="map-container">
         <iframe
-          src="https://maps.google.com/maps?q=Yerba+Buena,+Tucuman,+Argentina&hl=es&z=13&output=embed"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-65.35%2C-26.88%2C-65.22%2C-26.77&layer=mapnik&marker=-26.8229%2C-65.2857"
           width="100%" height="260"
           loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación Marq. Estudio">
+          title="Ubicación Marq. Estudio — Yerba Buena, Tucumán">
         </iframe>
       </div>
     </div>
