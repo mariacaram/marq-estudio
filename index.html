@@ -559,6 +559,69 @@
       color: #777;
     }
 
+    /* ── LIGHTBOX ───────────────────────────────────────────── */
+    .proj-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(6,6,6,.96);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .proj-modal.open { display: flex; animation: mFade .28s ease; }
+    @keyframes mFade { from { opacity: 0; } to { opacity: 1; } }
+    .proj-modal-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      max-width: min(92vw, 1000px);
+    }
+    .proj-modal-img {
+      display: block;
+      max-width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      border-radius: 2px;
+      animation: mZoom .35s cubic-bezier(.16,1,.3,1);
+    }
+    @keyframes mZoom { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .proj-modal-cat {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      text-align: center;
+    }
+    .proj-modal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 3vw, 34px);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      text-align: center;
+      margin-top: 4px;
+    }
+    .proj-modal-close {
+      position: fixed;
+      top: 20px; right: 20px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.25);
+      background: none;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .2s, background .2s;
+    }
+    .proj-modal-close:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
     /* ── FOOTER ─────────────────────────────────────────────── */
     footer {
       border-top: 1px solid #f0f0f0;
@@ -703,7 +766,7 @@
       <div class="proj-overlay">
         <span class="p-cat">Residencial · 2025</span>
         <div class="p-name">Casa San Pablo TC</div>
-        <div class="p-link">Ver proyecto</div>
+        <div class="p-link proj-trigger">Ver proyecto</div>
       </div>
       <div class="proj-caption">
         <div class="pc-name">Casa San Pablo TC</div>
@@ -724,7 +787,7 @@
       <div class="proj-overlay">
         <span class="p-cat">Comercial · 2025</span>
         <div class="p-name">Oficinas Docks L10</div>
-        <div class="p-link">Ver proyecto</div>
+        <div class="p-link proj-trigger">Ver proyecto</div>
       </div>
       <div class="proj-caption">
         <div class="pc-name">Oficinas Docks L10</div>
@@ -745,7 +808,7 @@
       <div class="proj-overlay">
         <span class="p-cat">Residencial · 2025</span>
         <div class="p-name">Galería Casa ML Praderas</div>
-        <div class="p-link">Ver proyecto</div>
+        <div class="p-link proj-trigger">Ver proyecto</div>
       </div>
       <div class="proj-caption">
         <div class="pc-name">Galería Casa ML Praderas</div>
@@ -766,7 +829,7 @@
       <div class="proj-overlay">
         <span class="p-cat">Interiores · 2025</span>
         <div class="p-name">Dormitorios Casa WI</div>
-        <div class="p-link">Ver proyecto</div>
+        <div class="p-link proj-trigger">Ver proyecto</div>
       </div>
       <div class="proj-caption">
         <div class="pc-name">Dormitorios Casa WI</div>
@@ -894,6 +957,18 @@
     </div>
   </div>
 </section>
+
+<!-- ── LIGHTBOX MODAL ───────────────────────────────────────────── -->
+<div class="proj-modal" id="projModal">
+  <button class="proj-modal-close" id="projModalClose">✕</button>
+  <div class="proj-modal-inner">
+    <img class="proj-modal-img" id="projModalImg" src="" alt="">
+    <div>
+      <div class="proj-modal-cat" id="projModalCat"></div>
+      <div class="proj-modal-name" id="projModalName"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ── FOOTER ────────────────────────────────────────────────── -->
 <footer>
@@ -1126,37 +1201,50 @@
     imgRevealObs.observe(item);
   });
 
-  // 3D tilt on project images (desktop)
-  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+  // Mobile: tap muestra overlay; tap fuera cierra
   document.querySelectorAll('.proj-item').forEach(item => {
-    if (!isTouchDevice) {
-      item.addEventListener('mouseenter', () => {
-        item.style.transition = 'transform .15s ease';
-      });
-      item.addEventListener('mousemove', (e) => {
-        const r = item.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        item.style.transform = `perspective(900px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) scale3d(1.02,1.02,1.02)`;
-      });
-      item.addEventListener('mouseleave', () => {
-        item.style.transition = 'transform .55s cubic-bezier(.25,.46,.45,.94)';
-        item.style.transform = '';
-      });
-    } else {
-      // Mobile: tap muestra overlay, segundo tap o tap fuera lo cierra
-      item.addEventListener('click', (e) => {
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('.proj-trigger')) return; // lo maneja el lightbox
+      if (window.matchMedia('(hover: none)').matches) {
         const isActive = item.classList.contains('touch-active');
         document.querySelectorAll('.proj-item.touch-active').forEach(i => i.classList.remove('touch-active'));
         if (!isActive) item.classList.add('touch-active');
-      });
-    }
+      }
+    });
   });
-  // Cerrar overlay mobile al tocar fuera
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.proj-item')) {
+    if (!e.target.closest('.proj-item'))
       document.querySelectorAll('.proj-item.touch-active').forEach(i => i.classList.remove('touch-active'));
-    }
+  });
+
+  // Lightbox
+  const modal    = document.getElementById('projModal');
+  const mImg     = document.getElementById('projModalImg');
+  const mName    = document.getElementById('projModalName');
+  const mCat     = document.getElementById('projModalCat');
+
+  function openModal(item) {
+    const img  = item.querySelector('.img-wrap img');
+    mImg.src   = img.src;
+    mImg.alt   = img.alt;
+    mName.textContent = item.querySelector('.p-name')?.textContent || '';
+    mCat.textContent  = item.querySelector('.p-cat')?.textContent  || '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('projModalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('.proj-trigger').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      openModal(e.target.closest('.proj-item'));
+    });
   });
 
   // WhatsApp widget toggle
