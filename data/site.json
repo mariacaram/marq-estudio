@@ -3,14 +3,25 @@
   "ajustes": {
     "instagram": "https://www.instagram.com/_marq.estudio",
     "whatsapps": [
-      { "nombre": "Rosarito", "numero": "5493816438080" },
-      { "nombre": "Emi", "numero": "5493816360811" }
+      {
+        "nombre": "Rosarito",
+        "numero": "5493816438080"
+      },
+      {
+        "nombre": "Emi",
+        "numero": "5493816360811"
+      }
     ],
     "email": "marq.estudio2@gmail.com",
     "ecommerce": "",
     "ubicacion": "Yerba Buena, Tucumán · Argentina",
     "precioMinimoUSD": 1500,
-    "rangosPresupuesto": ["1.5k – 3k", "3k – 6k", "6k – 12k", "+12k"]
+    "rangosPresupuesto": [
+      "1.5k – 3k",
+      "3k – 6k",
+      "6k – 12k",
+      "+12k"
+    ]
   },
   "inicio": {
     "eslogan": "Espacios que inspiran\ny emocionan.",
@@ -30,13 +41,13 @@
         "nombre": "Rosarito",
         "rol": "Arquitecta · Cofundadora",
         "bio": "Completá una breve bio desde el panel de administración.",
-        "foto": ""
+        "foto": "assets/equipo/rosarito.jpg"
       },
       {
         "nombre": "Emi",
         "rol": "Arquitecta · Cofundadora",
         "bio": "Completá una breve bio desde el panel de administración.",
-        "foto": ""
+        "foto": "assets/equipo/emi.jpg"
       }
     ]
   },
@@ -94,18 +105,54 @@
         "portada": "01.jpg",
         "intro": "Un living de doble altura donde la luz natural atraviesa las cortinas y define la atmósfera. Texturas suaves, grises profundos y madera para una casa que se vive de día y de noche.",
         "fotos": [
-          { "src": "01.jpg", "tamano": "auto" },
-          { "src": "02.jpg", "tamano": "auto" },
-          { "src": "03.jpg", "tamano": "auto" },
-          { "src": "04.jpg", "tamano": "completa" },
-          { "src": "05.jpg", "tamano": "auto" },
-          { "src": "06.jpg", "tamano": "auto" },
-          { "src": "07.jpg", "tamano": "auto" },
-          { "src": "08.jpg", "tamano": "auto" },
-          { "src": "09.jpg", "tamano": "grande" },
-          { "src": "10.jpg", "tamano": "auto" },
-          { "src": "11.jpg", "tamano": "auto" },
-          { "src": "12.jpg", "tamano": "auto" }
+          {
+            "src": "01.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "02.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "03.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "04.jpg",
+            "tamano": "completa"
+          },
+          {
+            "src": "05.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "06.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "07.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "08.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "09.jpg",
+            "tamano": "grande"
+          },
+          {
+            "src": "10.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "11.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "12.jpg",
+            "tamano": "auto"
+          }
         ]
       },
       {
@@ -116,19 +163,58 @@
         "portada": "01.jpg",
         "intro": "Un espacio de trabajo pensado para el encuentro: materiales nobles, iluminación cálida y una planta flexible que acompaña el ritmo del equipo.",
         "fotos": [
-          { "src": "01.jpg", "tamano": "auto" },
-          { "src": "02.jpg", "tamano": "auto" },
-          { "src": "03.jpg", "tamano": "completa" },
-          { "src": "04.jpg", "tamano": "auto" },
-          { "src": "05.jpg", "tamano": "auto" },
-          { "src": "06.jpg", "tamano": "auto" },
-          { "src": "07.jpg", "tamano": "auto" },
-          { "src": "08.jpg", "tamano": "grande" },
-          { "src": "09.jpg", "tamano": "auto" },
-          { "src": "10.jpg", "tamano": "auto" },
-          { "src": "11.jpg", "tamano": "auto" },
-          { "src": "12.jpg", "tamano": "auto" },
-          { "src": "13.jpg", "tamano": "auto" }
+          {
+            "src": "01.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "02.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "03.jpg",
+            "tamano": "completa"
+          },
+          {
+            "src": "04.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "05.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "06.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "07.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "08.jpg",
+            "tamano": "grande"
+          },
+          {
+            "src": "09.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "10.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "11.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "12.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "13.jpg",
+            "tamano": "auto"
+          }
         ]
       },
       {
@@ -139,24 +225,78 @@
         "portada": "01.jpg",
         "intro": "La galería como corazón de la casa: un límite difuso entre interior y exterior, donde la sombra, el verde y la piedra arman el escenario de la vida en familia.",
         "fotos": [
-          { "src": "01.jpg", "tamano": "auto" },
-          { "src": "02.jpg", "tamano": "auto" },
-          { "src": "03.jpg", "tamano": "auto" },
-          { "src": "04.jpg", "tamano": "completa" },
-          { "src": "05.jpg", "tamano": "auto" },
-          { "src": "06.jpg", "tamano": "auto" },
-          { "src": "07.jpg", "tamano": "auto" },
-          { "src": "08.jpg", "tamano": "auto" },
-          { "src": "09.jpg", "tamano": "grande" },
-          { "src": "10.jpg", "tamano": "auto" },
-          { "src": "11.jpg", "tamano": "auto" },
-          { "src": "12.jpg", "tamano": "auto" },
-          { "src": "13.jpg", "tamano": "completa" },
-          { "src": "14.jpg", "tamano": "auto" },
-          { "src": "15.jpg", "tamano": "auto" },
-          { "src": "16.jpg", "tamano": "auto" },
-          { "src": "17.jpg", "tamano": "auto" },
-          { "src": "18.jpg", "tamano": "auto" }
+          {
+            "src": "01.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "02.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "03.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "04.jpg",
+            "tamano": "completa"
+          },
+          {
+            "src": "05.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "06.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "07.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "08.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "09.jpg",
+            "tamano": "grande"
+          },
+          {
+            "src": "10.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "11.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "12.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "13.jpg",
+            "tamano": "completa"
+          },
+          {
+            "src": "14.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "15.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "16.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "17.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "18.jpg",
+            "tamano": "auto"
+          }
         ]
       },
       {
@@ -167,20 +307,62 @@
         "portada": "01.jpg",
         "intro": "Tres dormitorios, tres personalidades. Paletas serenas, textiles en capas y guardado a medida para que cada habitación cuente su propia historia.",
         "fotos": [
-          { "src": "01.jpg", "tamano": "auto" },
-          { "src": "02.jpg", "tamano": "auto" },
-          { "src": "03.jpg", "tamano": "auto" },
-          { "src": "04.jpg", "tamano": "grande" },
-          { "src": "05.jpg", "tamano": "auto" },
-          { "src": "06.jpg", "tamano": "auto" },
-          { "src": "07.jpg", "tamano": "completa" },
-          { "src": "08.jpg", "tamano": "auto" },
-          { "src": "09.jpg", "tamano": "auto" },
-          { "src": "10.jpg", "tamano": "auto" },
-          { "src": "11.jpg", "tamano": "auto" },
-          { "src": "12.jpg", "tamano": "auto" },
-          { "src": "13.jpg", "tamano": "auto" },
-          { "src": "14.jpg", "tamano": "auto" }
+          {
+            "src": "01.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "02.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "03.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "04.jpg",
+            "tamano": "grande"
+          },
+          {
+            "src": "05.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "06.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "07.jpg",
+            "tamano": "completa"
+          },
+          {
+            "src": "08.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "09.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "10.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "11.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "12.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "13.jpg",
+            "tamano": "auto"
+          },
+          {
+            "src": "14.jpg",
+            "tamano": "auto"
+          }
         ]
       }
     ]
