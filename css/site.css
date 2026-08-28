@@ -277,12 +277,12 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .hero .display { margin-top: 0; text-shadow: 0 2px 24px rgba(0,0,0,0.3); }
 
 /* Entrada del hero: la marca aparece, el eslogan sube línea por línea */
-.hero .mark, .hero-sub, .hero-scroll { opacity: 0; animation: hero-fade 0.9s var(--ease-out) forwards; }
-.hero .mark { animation-delay: 0.15s; }
-.hero-sub { animation-delay: 0.85s; }
-.hero-scroll { animation-delay: 1.15s; }
+.hero .mark, .hero-sub, .hero-scroll { opacity: 0; animation: hero-fade 1.4s var(--ease-out) forwards; }
+.hero .mark { animation-delay: 0.35s; }
+.hero-sub { animation-delay: 1.9s; }
+.hero-scroll { animation-delay: 2.4s; }
 .hero .hl { display: block; overflow: clip; }
-.hero .hl > span { display: block; transform: translateY(112%); animation: hero-line 0.95s var(--ease-out) var(--d, 0.35s) forwards; }
+.hero .hl > span { display: block; transform: translateY(112%); animation: hero-line 1.5s var(--ease-out) var(--d, 0.85s) forwards; }
 @keyframes hero-line { to { transform: none; } }
 @keyframes hero-fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {

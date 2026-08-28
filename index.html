@@ -32,7 +32,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=4">
+<link rel="stylesheet" href="css/site.css?v=5">
 </head>
 <body>
 
@@ -61,7 +61,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 
   /* ---------- Secciones ---------- */
   const heroLines = String(data.inicio.eslogan || "").split("\n").map((l, i) =>
-    `<span class="hl"><span style="--d:${(0.35 + i * 0.16).toFixed(2)}s">${escapeHtml(l)}</span></span>`).join("");
+    `<span class="hl"><span style="--d:${(0.85 + i * 0.28).toFixed(2)}s">${escapeHtml(l)}</span></span>`).join("");
   const heroHtml = `
     <section class="hero" id="inicio">
       <div class="hero-media"><img src="${escapeHtml(data.inicio.imagen)}" alt="" fetchpriority="high"></div>
