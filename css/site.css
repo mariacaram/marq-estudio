@@ -513,6 +513,35 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .send-row .hint { font-size: 0.8rem; color: var(--taupe); }
 .wa-choice { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
+/* ---------- Sección oscura (contacto) ---------- */
+.section.dark {
+  background: var(--band);
+  color: var(--band-ink);
+}
+.section.dark .kicker { color: #A8A29A; }
+.section.dark .lead { color: #C9C5BE; }
+.section.dark .big-link { border-bottom-color: rgba(244,242,238,0.16); }
+.section.dark .big-link:hover { border-bottom-color: var(--band-ink); }
+.section.dark .big-link .tag { color: #A8A29A; }
+.section.dark .form-block h4 { color: #A8A29A; }
+.section.dark .chip {
+  background: transparent;
+  border-color: rgba(244,242,238,0.24);
+  color: var(--band-ink);
+}
+.section.dark .chip:hover { border-color: var(--band-ink); }
+.section.dark .chip.sel { background: var(--band-ink); color: var(--band); border-color: var(--band-ink); }
+.section.dark .field input, .section.dark .field textarea {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(244,242,238,0.2);
+  color: var(--band-ink);
+}
+.section.dark .field input:focus, .section.dark .field textarea:focus { border-color: var(--band-ink); }
+.section.dark .field input::placeholder, .section.dark .field textarea::placeholder { color: rgba(244,242,238,0.42); }
+.section.dark .form-note, .section.dark .send-row .hint { color: #A8A29A; }
+.section.dark .btn { background: var(--band-ink); color: var(--band); border-color: var(--band-ink); }
+.section.dark .btn:hover { background: transparent; color: var(--band-ink); }
+
 /* ---------- Instagram / tienda strip ---------- */
 .follow {
   text-align: center;
@@ -537,7 +566,9 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 
 /* ---------- Footer ---------- */
 .footer {
-  border-top: 1px solid var(--line);
+  background: var(--band);
+  color: var(--band-ink);
+  border-top: 1px solid rgba(244,242,238,0.12);
   padding: clamp(2.4rem, 6vw, 4rem) var(--gutter);
   display: grid; gap: 2rem;
 }
@@ -548,9 +579,10 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 }
 .footer .wordmark { font-size: 1.3rem; }
 .footer nav { display: flex; flex-wrap: wrap; gap: 1.4rem; }
-.footer nav a { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); transition: color 0.3s; }
-.footer nav a:hover { color: var(--ink); }
-.footer .fine { font-size: 0.78rem; color: var(--taupe); }
+.footer nav a { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #A8A29A; transition: color 0.3s; }
+.footer nav a:hover { color: var(--band-ink); }
+.footer .fine { font-size: 0.78rem; color: #8F8A82; }
+.footer .wordmark small { color: #A8A29A; }
 
 /* ---------- Botones flotantes (Instagram + WhatsApp) ---------- */
 .float-group {
