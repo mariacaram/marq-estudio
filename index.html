@@ -38,11 +38,11 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 
 <main id="app" style="min-height:100svh"></main>
 
-<script src="js/site.js"></script>
-<script src="js/gallery.js"></script>
+<script src="js/site.js?v=2"></script>
+<script src="js/gallery.js?v=2"></script>
 <script>
 (async function () {
-  const { loadData, renderChrome, preloader, initReveals, waLink, escapeHtml, nl2br } = window.MARQ;
+  const { loadData, renderChrome, preloader, initReveals, animateScrollTo, waLink, escapeHtml, nl2br } = window.MARQ;
   preloader();
 
   let data;
@@ -236,7 +236,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     const go = e.target.closest("[data-goto]");
     if (!go) return;
     const target = document.querySelector(go.dataset.goto);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    if (target) animateScrollTo(target.getBoundingClientRect().top + window.scrollY);
     if (go.dataset.servicio) {
       document.querySelectorAll("#chips-necesidad .chip").forEach(c => {
         if (c.dataset.v === go.dataset.servicio) { c.classList.add("sel"); }

@@ -135,6 +135,43 @@
     });
   }
 
+  /* ---------- Navegación entre secciones: viaje lento y sereno ---------- */
+  let animRaf = null;
+  function animateScrollTo(y, durOverride) {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { window.scrollTo(0, y); return; }
+    cancelAnimationFrame(animRaf);
+    const start = window.scrollY;
+    const dist = y - start;
+    if (Math.abs(dist) < 2) return;
+    // más distancia, más tiempo: entre 1.2s y 2.6s
+    const dur = durOverride || Math.min(2600, 1200 + Math.abs(dist) * 0.45);
+    const t0 = performance.now();
+    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      window.scrollTo(0, start + dist * ease(p));
+      if (p < 1) animRaf = requestAnimationFrame(step);
+    };
+    animRaf = requestAnimationFrame(step);
+    // si la persona interviene (rueda, tacto, teclado), el viaje se cancela
+    const cancel = () => cancelAnimationFrame(animRaf);
+    ["wheel", "touchstart", "keydown"].forEach(ev =>
+      window.addEventListener(ev, cancel, { once: true, passive: true }));
+  }
+
+  // anclas de la misma página (nav, menú móvil, botones data-goto)
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href*="#"]');
+    if (!a) return;
+    const url = new URL(a.getAttribute("href"), location.href);
+    if (url.pathname !== location.pathname || !url.hash) return;
+    const target = document.querySelector(url.hash);
+    if (!target) return;
+    e.preventDefault();
+    history.pushState(null, "", url.hash);
+    animateScrollTo(target.getBoundingClientRect().top + window.scrollY);
+  });
+
   /* ---------- Scroll con inercia (solo rueda de mouse, desktop) ---------- */
   function initSmoothScroll() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -164,5 +201,5 @@
   }
   initSmoothScroll();
 
-  window.MARQ = { loadData, renderChrome, preloader, initReveals, waLink, escapeHtml, nl2br, ICONS, $, $$ };
+  window.MARQ = { loadData, renderChrome, preloader, initReveals, animateScrollTo, waLink, escapeHtml, nl2br, ICONS, $, $$ };
 })();
