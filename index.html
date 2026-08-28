@@ -21,7 +21,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v=3">
 </head>
 <body>
 
@@ -74,60 +74,73 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
       </div>
     </section>`;
 
-  const statementHtml = `
-    <section class="statement">
-      <p class="reveal">“<em>${escapeHtml(data.estudio.cita)}</em>”</p>
-    </section>`;
-
   const team = data.estudio.integrantes || [];
   const aboutHtml = `
     <section class="section" id="estudio">
       <div class="wrap">
-        <div class="about-grid">
+        <div class="about-head">
           <div>
             <p class="kicker reveal">Quiénes somos</p>
-            <h2 class="h-section reveal">${nl2br(data.estudio.titulo)}</h2>
-            ${data.estudio.parrafos.map(p => `<p class="lead reveal">${escapeHtml(p)}</p>`).join("")}
-            <div class="team" data-stagger>
-              ${team.map(m => `
-                <article>
-                  <div class="frame">${m.foto
-                    ? `<img src="${escapeHtml(m.foto)}" alt="${escapeHtml(m.nombre)}" loading="lazy">`
-                    : `<span class="ph mark"><span class="dot">.</span>M</span>`}</div>
-                  <h3>${escapeHtml(m.nombre)}</h3>
-                  <span class="rol">${escapeHtml(m.rol)}</span>
-                  <p class="bio">${escapeHtml(m.bio)}</p>
-                </article>`).join("")}
-            </div>
+            <h2 class="h-section reveal" style="margin-bottom:0">${nl2br(data.estudio.titulo)}</h2>
           </div>
-          <figure class="frame reveal-img" style="margin:0">
-            <img src="${escapeHtml(data.estudio.imagen)}" alt="Interior diseñado por Marq. Estudio" loading="lazy">
-          </figure>
+          <div class="about-copy">
+            ${data.estudio.parrafos.map(p => `<p class="lead reveal">${escapeHtml(p)}</p>`).join("")}
+          </div>
+        </div>
+      </div>
+      <figure class="about-banner reveal-img">
+        <img src="${escapeHtml(data.estudio.imagen)}" alt="Rosarito y Emi, fundadoras de Marq. Estudio" loading="lazy">
+        <blockquote class="reveal">“${escapeHtml(data.estudio.cita)}”</blockquote>
+      </figure>
+      <div class="wrap">
+        <div class="team" data-stagger>
+          ${team.map(m => `
+            <article>
+              <div class="frame">${m.foto
+                ? `<img src="${escapeHtml(m.foto)}" alt="${escapeHtml(m.nombre)}" loading="lazy">`
+                : `<span class="ph mark"><span class="dot">.</span>M</span>`}</div>
+              <h3>${escapeHtml(m.nombre)}</h3>
+              <span class="rol">${escapeHtml(m.rol)}</span>
+              <p class="bio">${escapeHtml(m.bio)}</p>
+            </article>`).join("")}
         </div>
       </div>
     </section>`;
+
+  const twoTone = t => String(t || "").split("\n").map((l, i) =>
+    `<span${i % 2 ? ' class="tone"' : ""}>${escapeHtml(l)}</span>`).join("<br>");
 
   const servHtml = `
     <section class="section" id="servicios">
       <div class="wrap">
         <div class="section-head">
           <p class="kicker reveal">Diseños a distancia</p>
-          <h2 class="h-section reveal">${nl2br(data.servicios.titulo)}</h2>
+          <h2 class="h-section reveal">${twoTone(data.servicios.titulo)}</h2>
           <p class="lead reveal">${escapeHtml(data.servicios.intro)}</p>
         </div>
-        <div class="services">
-          ${data.servicios.items.map(s => `
-            <article class="service reveal" id="serv-${escapeHtml(s.id)}">
-              <div>
-                <span class="desde">Desde <strong>USD ${Number(s.desdeUSD).toLocaleString("es-AR")}</strong></span>
-                <h3>${escapeHtml(s.nombre)}</h3>
-                <p class="bajada">${escapeHtml(s.bajada)}</p>
-                <ul class="para">${(s.para || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
-                <div class="cta-row"><button class="btn" data-goto="#contacto" data-servicio="${escapeHtml(s.nombre)}">Quiero este programa</button></div>
-              </div>
-              <div class="entregables">
-                <h4>Qué incluye</h4>
-                <ul>${(s.entregables || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+        <div class="svc-list reveal">
+          ${data.servicios.items.map((s, i) => `
+            <article class="svc-item" id="serv-${escapeHtml(s.id)}">
+              <button class="svc-row" aria-expanded="false" aria-controls="svc-body-${i}">
+                <span class="svc-num">${String(i + 1).padStart(2, "0")}</span>
+                <span class="svc-name">${escapeHtml(s.nombre)}</span>
+                <span class="svc-desde">Desde USD ${Number(s.desdeUSD).toLocaleString("es-AR")}</span>
+                <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></span>
+              </button>
+              <div class="svc-body" id="svc-body-${i}">
+                <div class="svc-body-inner">
+                  <div class="svc-cols">
+                    <div>
+                      <p class="bajada">${escapeHtml(s.bajada)}</p>
+                      <ul class="para">${(s.para || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+                      <div class="cta-row"><button class="btn" data-goto="#contacto" data-servicio="${escapeHtml(s.nombre)}">Quiero este programa</button></div>
+                    </div>
+                    <div class="entregables">
+                      <h4>Qué incluye</h4>
+                      <ul>${(s.entregables || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </article>`).join("")}
         </div>
@@ -196,7 +209,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
       </div>
     </section>`;
 
-  app.innerHTML = heroHtml + projHtml + statementHtml + aboutHtml + servHtml + followHtml + contactoHtml;
+  app.innerHTML = heroHtml + projHtml + aboutHtml + servHtml + followHtml + contactoHtml;
   renderChrome(data, { onHero: true, base: "" });
   initReveals();
 
@@ -212,6 +225,22 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
         if (c.dataset.v === go.dataset.servicio) { c.classList.add("sel"); }
       });
     }
+  });
+
+  // acordeón de servicios (uno abierto a la vez)
+  document.querySelectorAll(".svc-row").forEach(row => {
+    row.addEventListener("click", () => {
+      const item = row.closest(".svc-item");
+      const open = item.classList.contains("open");
+      document.querySelectorAll(".svc-item.open").forEach(x => {
+        x.classList.remove("open");
+        x.querySelector(".svc-row").setAttribute("aria-expanded", "false");
+      });
+      if (!open) {
+        item.classList.add("open");
+        row.setAttribute("aria-expanded", "true");
+      }
+    });
   });
 
   // chips selección única por grupo

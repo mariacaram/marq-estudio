@@ -302,20 +302,9 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .section + .section { border-top: 1px solid var(--line); }
 .section-head { max-width: 60rem; }
 
-/* Frase intermedia gigante (ritmo del scroll) */
-.statement {
-  padding-block: clamp(5rem, 12vw, 9rem);
-  text-align: center;
-}
-.statement p {
-  margin: 0 auto;
-  max-width: 24ch;
-  font-weight: 200;
-  font-size: clamp(1.7rem, 4.4vw, 3.3rem);
-  line-height: 1.22;
-  text-wrap: balance;
-}
-.statement em { font-style: normal; border-bottom: 3px solid transparent; border-image: linear-gradient(90deg,#BFD9EE,#CCC2E6,#C2DACB,#EFE6C4) 1; }
+/* En el hero la .M gigante ya nombra la marca: el wordmark del nav aparece al scrollear */
+.nav.on-hero .nav-brand { opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease-soft); }
+.nav.solid .nav-brand { opacity: 1; pointer-events: auto; transition: opacity 0.5s var(--ease-soft); }
 
 /* ---------- Proyectos (portada) ---------- */
 .proj-grid {
@@ -357,22 +346,35 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .proj-card:hover .frame::after { opacity: 1; scale: 1; }
 
 /* ---------- Estudio ---------- */
-.about-grid {
-  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: clamp(2rem, 6vw, 5.5rem);
-  align-items: start;
+.about-head {
+  display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
 }
-.about-grid .frame { overflow: clip; position: sticky; top: 6.5rem; }
-.about-grid .frame img { width: 100%; height: auto; }
-.about-quote {
-  margin: 2.6rem 0 0;
-  padding-left: 1.6rem;
-  border-left: 1px solid var(--ink);
-  font-weight: 300;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  line-height: 1.4;
+.about-banner {
+  position: relative; margin: 0;
+  width: 100%;
+  height: min(78svh, 640px);
+  overflow: clip;
 }
-.team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.4rem, 3vw, 2.6rem); margin-top: clamp(2.6rem, 6vw, 4rem); }
+.about-banner img { width: 100%; height: 100%; object-fit: cover; }
+.about-banner::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(20,19,17,0.12) 0%, rgba(20,19,17,0.05) 45%, rgba(20,19,17,0.45) 100%);
+}
+.about-banner blockquote {
+  position: absolute; inset: 0; z-index: 2;
+  display: grid; align-content: end; justify-items: center;
+  margin: 0; padding: 0 var(--gutter) clamp(2.2rem, 6vw, 4rem);
+  color: #fff; text-align: center;
+  font-weight: 200;
+  font-size: clamp(1.35rem, 3.2vw, 2.5rem);
+  line-height: 1.28;
+  text-wrap: balance;
+  text-shadow: 0 2px 26px rgba(0,0,0,0.45);
+}
+.team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.4rem, 3vw, 2.6rem); margin-top: clamp(2.6rem, 6vw, 4rem); max-width: 58rem; }
 .team .frame { aspect-ratio: 3 / 3.6; overflow: clip; background: var(--line); position: relative; }
 .team .frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
 .team article:hover .frame img { transform: scale(1.04); }
@@ -384,55 +386,76 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .team .rol { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); }
 .team p.bio { color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.7rem; }
 
-/* ---------- Servicios ---------- */
-.services { display: grid; gap: clamp(2.2rem, 5vw, 3.6rem); margin-top: clamp(2.4rem, 5vw, 3.6rem); }
-.service {
+/* ---------- Servicios (acordeón estilo lista) ---------- */
+.h-section .tone { color: var(--taupe); }
+
+.svc-list { margin-top: clamp(2.4rem, 5vw, 3.6rem); border-bottom: 1px solid var(--line); }
+.svc-item { border-top: 1px solid var(--line); }
+.svc-row {
+  width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.4rem);
+  padding: clamp(1.4rem, 3.6vw, 2.4rem) 0;
+  background: none; border: 0; cursor: pointer;
+  color: var(--ink); text-align: left;
+  transition: opacity 0.3s;
+}
+.svc-num { font-size: 0.95rem; font-weight: 500; color: var(--taupe); letter-spacing: 0.08em; }
+.svc-name {
+  font-weight: 300;
+  font-size: clamp(1.35rem, 3.4vw, 2.3rem);
+  letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.1;
+  transition: color 0.35s;
+}
+.svc-row:hover .svc-name, .svc-item.open .svc-name { color: var(--taupe); }
+.svc-desde {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--taupe); white-space: nowrap;
+}
+.svc-arrow {
+  display: grid; place-items: center;
+  width: clamp(2.6rem, 5vw, 3.2rem); height: clamp(2.6rem, 5vw, 3.2rem);
+  border: 1px solid var(--taupe); border-radius: 50%;
+  color: var(--taupe);
+  transition: transform 0.55s var(--ease-out), background 0.35s, color 0.35s;
+}
+.svc-arrow svg { width: 1.1rem; height: 1.1rem; }
+.svc-row:hover .svc-arrow { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.svc-item.open .svc-arrow { transform: rotate(180deg); }
+
+.svc-body {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.7s var(--ease-out);
+}
+.svc-item.open .svc-body { grid-template-rows: 1fr; }
+.svc-body-inner { overflow: hidden; min-height: 0; }
+.svc-cols {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(1.6rem, 4vw, 4rem);
-  padding: clamp(1.8rem, 4vw, 3.2rem);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  position: relative;
-  overflow: clip;
+  padding: 0.4rem 0 clamp(2rem, 4.5vw, 3rem);
 }
-.service::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--irid);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.9s var(--ease-out);
-}
-.service:hover::before, .service.in::before { transform: scaleX(1); }
-.service h3 {
-  margin: 0.1em 0 0.25em;
-  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
-  font-weight: 300; letter-spacing: 0.03em; text-transform: uppercase; line-height: 1.08;
-}
-.service .desde {
-  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe);
-}
-.service .desde strong { display: block; color: var(--ink); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.02em; margin-top: 0.2rem; }
-.service .bajada { color: var(--ink-soft); margin: 1rem 0 0; max-width: 30em; }
-.service .para { margin: 1.4rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.45rem; }
-.service .para li { font-size: 0.92rem; color: var(--ink-soft); padding-left: 1.1rem; position: relative; }
-.service .para li::before { content: "—"; position: absolute; left: 0; color: var(--taupe); }
-.service .entregables h4 {
+.svc-cols .bajada { color: var(--ink-soft); margin: 0; max-width: 30em; }
+.svc-cols .para { margin: 1.4rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.45rem; }
+.svc-cols .para li { font-size: 0.92rem; color: var(--ink-soft); padding-left: 1.1rem; position: relative; }
+.svc-cols .para li::before { content: "—"; position: absolute; left: 0; color: var(--taupe); }
+.entregables h4 {
   margin: 0 0 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--taupe);
 }
-.service .entregables ul { margin: 0; padding: 0; list-style: none; }
-.service .entregables li {
+.entregables ul { margin: 0; padding: 0; list-style: none; counter-reset: entregable; }
+.entregables li {
   padding: 0.85rem 0;
   border-top: 1px solid var(--line);
   font-size: 0.98rem;
   display: flex; gap: 0.9rem; align-items: baseline;
 }
-.service .entregables li::before {
+.entregables li::before {
   content: counter(entregable, decimal-leading-zero);
   counter-increment: entregable;
   font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; color: var(--taupe);
 }
-.service .entregables ul { counter-reset: entregable; }
-.service .cta-row { margin-top: 1.6rem; }
+.cta-row { margin-top: 1.6rem; }
 
 .btn {
   display: inline-flex; align-items: center; gap: 0.7rem;
@@ -529,17 +552,20 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .footer nav a:hover { color: var(--ink); }
 .footer .fine { font-size: 0.78rem; color: var(--taupe); }
 
-/* ---------- WhatsApp flotante ---------- */
-.wa-float {
+/* ---------- Botones flotantes (Instagram + WhatsApp) ---------- */
+.float-group {
   position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 90;
+  display: grid; gap: 0.7rem;
+}
+.float-btn {
   width: 3.4rem; height: 3.4rem; border-radius: 50%;
   display: grid; place-items: center;
   background: var(--ink); color: var(--bg);
   box-shadow: 0 10px 30px -8px rgba(28,27,25,0.45);
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
 }
-.wa-float svg { width: 1.5rem; height: 1.5rem; }
-.wa-float:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 36px -8px rgba(28,27,25,0.5); }
+.float-btn svg { width: 1.5rem; height: 1.5rem; }
+.float-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 36px -8px rgba(28,27,25,0.5); }
 
 /* ---------- Página de proyecto ---------- */
 .proj-band {
@@ -634,19 +660,21 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
   .nav-left .icon-link { display: none; }
-  .about-grid, .contact-grid, .proj-intro { grid-template-columns: 1fr; }
-  .about-grid .frame { position: static; order: -1; }
-  .service { grid-template-columns: 1fr; }
+  .about-head, .contact-grid, .proj-intro { grid-template-columns: 1fr; }
+  .about-banner { height: min(62svh, 480px); }
+  .team { max-width: none; }
+  .svc-cols { grid-template-columns: 1fr; }
   .proj-card:nth-child(n) { grid-column: span 12; }
   .proj-card:nth-child(n) .frame { aspect-ratio: 4 / 3; }
   .follow-strip { grid-template-columns: repeat(3, 1fr); }
   .team { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 560px) {
+  .svc-desde { display: none; }
   .team { grid-template-columns: 1fr; }
   .jgallery .jrow { gap: 6px; margin-bottom: 6px; }
   .proj-cover img { height: 60svh; }
-  .wa-float { right: 1rem; bottom: 1rem; }
+  .float-group { right: 1rem; bottom: 1rem; }
 }
 
 /* ---------- Movimiento reducido ---------- */

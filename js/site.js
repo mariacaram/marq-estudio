@@ -41,7 +41,6 @@
     nav.className = "nav" + (onHero ? " on-hero" : " solid");
     nav.innerHTML = `
       <div class="nav-side nav-left">
-        <a class="icon-link" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">${ICONS.ig}</a>
         ${shopNav}
       </div>
       <a class="nav-brand wordmark" href="${base}index.html#inicio">MARQ<span class="mark"><span class="dot">.</span></span></a>
@@ -84,16 +83,13 @@
       onScroll();
     }
 
-    // WhatsApp flotante
-    if (wa0) {
-      const f = document.createElement("a");
-      f.className = "wa-float";
-      f.href = waLink(wa0.numero);
-      f.target = "_blank"; f.rel = "noopener";
-      f.setAttribute("aria-label", "Escribinos por WhatsApp");
-      f.innerHTML = ICONS.wa;
-      document.body.appendChild(f);
-    }
+    // Botones flotantes: Instagram + WhatsApp, mismo estilo
+    const fg = document.createElement("div");
+    fg.className = "float-group";
+    fg.innerHTML = `
+      <a class="float-btn" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Seguinos en Instagram">${ICONS.ig}</a>
+      ${wa0 ? `<a class="float-btn" href="${waLink(wa0.numero)}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">${ICONS.wa}</a>` : ""}`;
+    document.body.appendChild(fg);
 
     // Footer
     const foot = document.createElement("footer");
@@ -133,7 +129,7 @@
         if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    $$(".reveal, .reveal-img, [data-stagger], .service").forEach(el => {
+    $$(".reveal, .reveal-img, [data-stagger]").forEach(el => {
       if (el.hasAttribute("data-stagger")) $$(":scope > *", el).forEach((c, i) => c.style.setProperty("--i", i));
       io.observe(el);
     });
