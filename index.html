@@ -38,11 +38,11 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 
 <main id="app" style="min-height:100svh"></main>
 
-<script src="js/site.js?v=3"></script>
+<script src="js/site.js?v=4"></script>
 <script src="js/gallery.js?v=2"></script>
 <script>
 (async function () {
-  const { loadData, renderChrome, preloader, initReveals, animateScrollTo, waLink, escapeHtml, nl2br } = window.MARQ;
+  const { loadData, renderChrome, preloader, initReveals, animateScrollTo, gotoHashOnLoad, waLink, escapeHtml, nl2br } = window.MARQ;
   preloader();
 
   let data;
@@ -229,6 +229,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
   app.innerHTML = heroHtml + projHtml + aboutHtml + servHtml + followHtml + contactoHtml;
   renderChrome(data, { onHero: true, base: "" });
   initReveals();
+  gotoHashOnLoad();
 
   /* ---------- Interacción ---------- */
   // scroll suave a anclas + preselección de servicio

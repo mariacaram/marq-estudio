@@ -160,17 +160,29 @@
   }
 
   // anclas de la misma página (nav, menú móvil, botones data-goto)
+  // "/" y "/index.html" son la misma página: sin esto, en producción el menú
+  // recargaba la página en vez de desplazarse
+  const normPath = p => p.replace(/\/index\.html$/, "/");
   document.addEventListener("click", e => {
     const a = e.target.closest('a[href*="#"]');
     if (!a) return;
     const url = new URL(a.getAttribute("href"), location.href);
-    if (url.pathname !== location.pathname || !url.hash) return;
+    if (normPath(url.pathname) !== normPath(location.pathname) || !url.hash) return;
     const target = document.querySelector(url.hash);
     if (!target) return;
     e.preventDefault();
     history.pushState(null, "", url.hash);
     animateScrollTo(target.getBoundingClientRect().top + window.scrollY);
   });
+
+  // si la página se abre con un hash (#contacto, #proyectos…), el contenido
+  // se renderiza async: viajar a la sección cuando ya existe
+  function gotoHashOnLoad() {
+    if (!location.hash) return;
+    let target;
+    try { target = document.querySelector(location.hash); } catch { return; }
+    if (target) setTimeout(() => animateScrollTo(target.getBoundingClientRect().top + window.scrollY), 250);
+  }
 
   /* ---------- Scroll con inercia (solo rueda de mouse, desktop) ---------- */
   function initSmoothScroll() {
@@ -201,5 +213,5 @@
   }
   initSmoothScroll();
 
-  window.MARQ = { loadData, renderChrome, preloader, initReveals, animateScrollTo, waLink, escapeHtml, nl2br, ICONS, $, $$ };
+  window.MARQ = { loadData, renderChrome, preloader, initReveals, animateScrollTo, gotoHashOnLoad, waLink, escapeHtml, nl2br, ICONS, $, $$ };
 })();
