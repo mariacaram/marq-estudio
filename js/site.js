@@ -50,7 +50,6 @@
       </ul></nav>
       <div class="nav-cta">
         <a class="icon-link hide-m" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">${ICONS.ig}</a>
-        ${wa0 ? `<a class="icon-link hide-m" href="${waLink(wa0.numero)}" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">${ICONS.wa}</a>` : ""}
         ${shopNav}
         <button class="nav-toggle" aria-label="Menú" aria-expanded="false"><span></span><span></span></button>
       </div>`;
