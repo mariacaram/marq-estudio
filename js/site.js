@@ -43,7 +43,7 @@
       <div class="nav-side nav-left">
         ${shopNav}
       </div>
-      <a class="nav-brand wordmark" href="${base}index.html#inicio">MARQ<span class="mark"><span class="dot">.</span></span></a>
+      <a class="nav-brand" href="${base}index.html#inicio"><img src="${base}assets/brand/logo-marq.svg" alt="Marq. Estudio"></a>
       <div class="nav-side nav-right">
         <nav aria-label="Principal"><ul class="nav-links">
           <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
@@ -97,8 +97,8 @@
     foot.innerHTML = `
       <div class="footer-inner">
         <div>
-          <div class="wordmark">MARQ<span class="mark"><span class="dot">.</span></span> ESTUDIO<small>Arquitectura &amp; Diseño</small></div>
-          <p class="fine" style="margin:1rem 0 0">${escapeHtml(aj.ubicacion)}</p>
+          <img class="footer-logo" src="${base}assets/brand/logo-marq-blanco.svg" alt="Marq. Estudio">
+          <p class="fine" style="margin:1.1rem 0 0">Arquitectura &amp; Diseño — ${escapeHtml(aj.ubicacion)}</p>
         </div>
         <nav aria-label="Redes">
           <a href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener">Instagram</a>
@@ -117,7 +117,7 @@
     sessionStorage.setItem("marq-visited", "1");
     const p = document.createElement("div");
     p.className = "preloader";
-    p.innerHTML = `<div><span class="mark"><span class="dot">.</span>M</span><div class="bar"></div></div>`;
+    p.innerHTML = `<div><img class="pre-mark" src="assets/brand/m-pos.svg" alt="Marq."><div class="bar"></div></div>`;
     document.body.appendChild(p);
     setTimeout(() => { p.classList.add("done"); setTimeout(() => p.remove(), 900); }, 1650);
   }

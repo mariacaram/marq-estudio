@@ -29,16 +29,16 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/favicon.svg?v=2" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=6">
+<link rel="stylesheet" href="css/site.css?v=7">
 </head>
 <body>
 
 <main id="app" style="min-height:100svh"></main>
 
-<script src="js/site.js?v=4"></script>
+<script src="js/site.js?v=5"></script>
 <script src="js/gallery.js?v=2"></script>
 <script>
 (async function () {
@@ -66,7 +66,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     <section class="hero" id="inicio">
       <div class="hero-media"><img src="${escapeHtml(data.inicio.imagen)}" alt="" fetchpriority="high"></div>
       <div class="hero-inner">
-        <span class="mark"><span class="dot">.</span>M</span>
+        <img class="hero-mark" src="assets/brand/m-blanco.svg" alt="Marq.">
         <h1 class="display">${heroLines}</h1>
         <p class="hero-sub">${escapeHtml(data.inicio.sub)}</p>
       </div>
