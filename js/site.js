@@ -143,8 +143,8 @@
     const start = window.scrollY;
     const dist = y - start;
     if (Math.abs(dist) < 2) return;
-    // más distancia, más tiempo: entre 1.2s y 2.6s
-    const dur = durOverride || Math.min(2600, 1200 + Math.abs(dist) * 0.45);
+    // más distancia, más tiempo: entre 0.8s y 1.6s
+    const dur = durOverride || Math.min(1600, 800 + Math.abs(dist) * 0.22);
     const t0 = performance.now();
     const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
     const step = now => {
