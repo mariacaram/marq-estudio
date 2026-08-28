@@ -135,5 +135,34 @@
     });
   }
 
+  /* ---------- Scroll con inercia (solo rueda de mouse, desktop) ---------- */
+  function initSmoothScroll() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!matchMedia("(pointer: fine)").matches) return;
+    let target = window.scrollY;
+    let current = target;
+    let raf = null;
+    const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
+    const tick = () => {
+      current += (target - current) * 0.115;
+      if (Math.abs(target - current) < 0.5) { current = target; raf = null; }
+      else raf = requestAnimationFrame(tick);
+      window.scrollTo(0, current);
+    };
+    window.addEventListener("wheel", e => {
+      if (e.ctrlKey) return;                                   // zoom del navegador
+      if (document.body.style.overflow === "hidden") return;   // lightbox / menú abierto
+      if (document.body.classList.contains("menu-open")) return;
+      e.preventDefault();
+      const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+      if (!raf) { target = window.scrollY; current = target; }
+      target = Math.max(0, Math.min(maxY(), target + dy));
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, { passive: false });
+    // otras vías de scroll (anclas, teclado, barra) mantienen el objetivo al día
+    window.addEventListener("scroll", () => { if (!raf) target = window.scrollY; }, { passive: true });
+  }
+  initSmoothScroll();
+
   window.MARQ = { loadData, renderChrome, preloader, initReveals, waLink, escapeHtml, nl2br, ICONS, $, $$ };
 })();

@@ -18,10 +18,21 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Marq. Estudio — Arquitectura &amp; Diseño de Interiores</title>
 <meta name="description" content="Marq. Estudio: arquitectura y diseño de interiores en Yerba Buena, Tucumán. Espacios que inspiran y emocionan.">
+<link rel="canonical" href="https://marq-estudio.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Marq. Estudio">
+<meta property="og:title" content="Marq. Estudio — Arquitectura &amp; Diseño de Interiores">
+<meta property="og:description" content="Espacios que inspiran y emocionan. Arquitectura y diseño de interiores en Yerba Buena, Tucumán.">
+<meta property="og:url" content="https://marq-estudio.vercel.app/">
+<meta property="og:image" content="https://marq-estudio.vercel.app/assets/brand/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=3">
+<link rel="stylesheet" href="css/site.css?v=4">
 </head>
 <body>
 
@@ -45,13 +56,18 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
   const aj = data.ajustes;
   const app = document.getElementById("app");
 
+  const twoTone = t => String(t || "").split("\n").map((l, i) =>
+    `<span${i % 2 ? ' class="tone"' : ""}>${escapeHtml(l)}</span>`).join("<br>");
+
   /* ---------- Secciones ---------- */
+  const heroLines = String(data.inicio.eslogan || "").split("\n").map((l, i) =>
+    `<span class="hl"><span style="--d:${(0.35 + i * 0.16).toFixed(2)}s">${escapeHtml(l)}</span></span>`).join("");
   const heroHtml = `
     <section class="hero" id="inicio">
       <div class="hero-media"><img src="${escapeHtml(data.inicio.imagen)}" alt="" fetchpriority="high"></div>
       <div class="hero-inner">
         <span class="mark"><span class="dot">.</span>M</span>
-        <h1 class="display">${nl2br(data.inicio.eslogan)}</h1>
+        <h1 class="display">${heroLines}</h1>
         <p class="hero-sub">${escapeHtml(data.inicio.sub)}</p>
       </div>
       <button class="hero-scroll" data-goto="#proyectos"><span>Descubrir</span><span class="line"></span></button>
@@ -62,7 +78,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
       <div class="wrap">
         <div class="section-head">
           <p class="kicker reveal">Portfolio</p>
-          <h2 class="h-section reveal">${nl2br(data.proyectos.titulo)}</h2>
+          <h2 class="h-section reveal">${twoTone(data.proyectos.titulo)}</h2>
         </div>
         <div class="proj-grid">
           ${data.proyectos.items.map(p => `
@@ -81,7 +97,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
         <div class="about-head">
           <div>
             <p class="kicker reveal">Quiénes somos</p>
-            <h2 class="h-section reveal" style="margin-bottom:0">${nl2br(data.estudio.titulo)}</h2>
+            <h2 class="h-section reveal" style="margin-bottom:0">${twoTone(data.estudio.titulo)}</h2>
           </div>
           <div class="about-copy">
             ${data.estudio.parrafos.map(p => `<p class="lead reveal">${escapeHtml(p)}</p>`).join("")}
@@ -107,9 +123,6 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
       </div>
     </section>`;
 
-  const twoTone = t => String(t || "").split("\n").map((l, i) =>
-    `<span${i % 2 ? ' class="tone"' : ""}>${escapeHtml(l)}</span>`).join("<br>");
-
   const servHtml = `
     <section class="section" id="servicios">
       <div class="wrap">
@@ -124,7 +137,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
               <button class="svc-row" aria-expanded="false" aria-controls="svc-body-${i}">
                 <span class="svc-num">${String(i + 1).padStart(2, "0")}</span>
                 <span class="svc-name">${escapeHtml(s.nombre)}</span>
-                <span class="svc-desde">Desde USD ${Number(s.desdeUSD).toLocaleString("es-AR")}</span>
+                <span class="svc-desde">USD ${Number(s.desdeUSD).toLocaleString("es-AR")}</span>
                 <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></span>
               </button>
               <div class="svc-body" id="svc-body-${i}">
@@ -168,7 +181,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
         <div class="contact-grid">
           <div>
             <p class="kicker reveal">Contacto</p>
-            <h2 class="h-section reveal">${nl2br(data.contacto.titulo)}</h2>
+            <h2 class="h-section reveal">${twoTone(data.contacto.titulo)}</h2>
             <p class="lead reveal">${escapeHtml(data.contacto.intro)}</p>
             <div class="contact-info reveal">
               ${aj.whatsapps.map(w => `
@@ -198,11 +211,14 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
               <div class="field"><input type="text" id="f-nombre" placeholder="Tu nombre" autocomplete="name"></div>
               <div class="field"><textarea id="f-msg" rows="3" placeholder="Qué espacio querés transformar, en qué ciudad está…"></textarea></div>
             </div>
-            <div class="send-row">
-              <span class="hint">¿Con quién querés hablar?</span>
-              <div class="wa-choice">
-                ${aj.whatsapps.map(w => `<button type="button" class="btn" data-wa="${escapeHtml(w.numero)}">Enviar a ${escapeHtml(w.nombre)}</button>`).join("")}
+            <div class="form-block">
+              <h4>¿Con quién querés hablar?</h4>
+              <div class="chips" id="chips-wa">
+                ${aj.whatsapps.map((w, i) => `<button type="button" class="chip${i === 0 ? " sel" : ""}" data-wa="${escapeHtml(w.numero)}">${escapeHtml(w.nombre)}</button>`).join("")}
               </div>
+            </div>
+            <div class="send-row">
+              <button type="button" class="btn btn-send" id="send-wa">Enviar por WhatsApp&nbsp;↗</button>
             </div>
           </form>
         </div>
@@ -243,31 +259,31 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     });
   });
 
-  // chips selección única por grupo
-  ["chips-necesidad", "chips-presupuesto"].forEach(id => {
+  // chips selección única por grupo (necesidad admite varias; persona siempre queda una elegida)
+  ["chips-necesidad", "chips-presupuesto", "chips-wa"].forEach(id => {
     const g = document.getElementById(id);
     g.addEventListener("click", e => {
       const chip = e.target.closest(".chip");
       if (!chip) return;
       const multi = id === "chips-necesidad";
       if (!multi) g.querySelectorAll(".chip").forEach(c => { if (c !== chip) c.classList.remove("sel"); });
-      chip.classList.toggle("sel");
+      if (id === "chips-wa") chip.classList.add("sel");
+      else chip.classList.toggle("sel");
     });
   });
 
   // enviar por WhatsApp
-  document.querySelectorAll("[data-wa]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const nec = [...document.querySelectorAll("#chips-necesidad .chip.sel")].map(c => c.dataset.v);
-      const pres = document.querySelector("#chips-presupuesto .chip.sel");
-      const nombre = document.getElementById("f-nombre").value.trim();
-      const msg = document.getElementById("f-msg").value.trim();
-      let texto = "Hola Marq.! " + (nombre ? "Soy " + nombre + ". " : "") + "Vengo de la página web.";
-      if (nec.length) texto += "\nMi proyecto necesita: " + nec.join(", ") + ".";
-      if (pres) texto += "\nPresupuesto estimado: USD " + pres.dataset.v + ".";
-      if (msg) texto += "\n" + msg;
-      window.open(waLink(btn.dataset.wa, texto), "_blank", "noopener");
-    });
+  document.getElementById("send-wa").addEventListener("click", () => {
+    const persona = document.querySelector("#chips-wa .chip.sel") || document.querySelector("#chips-wa .chip");
+    const nec = [...document.querySelectorAll("#chips-necesidad .chip.sel")].map(c => c.dataset.v);
+    const pres = document.querySelector("#chips-presupuesto .chip.sel");
+    const nombre = document.getElementById("f-nombre").value.trim();
+    const msg = document.getElementById("f-msg").value.trim();
+    let texto = "Hola Marq.! " + (nombre ? "Soy " + nombre + ". " : "") + "Vengo de la página web.";
+    if (nec.length) texto += "\nMi proyecto necesita: " + nec.join(", ") + ".";
+    if (pres) texto += "\nPresupuesto estimado: USD " + pres.dataset.v + ".";
+    if (msg) texto += "\n" + msg;
+    window.open(waLink(persona.dataset.wa, texto), "_blank", "noopener");
   });
 
   // parallax sutil del hero
