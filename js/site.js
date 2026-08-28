@@ -40,17 +40,18 @@
     const nav = document.createElement("header");
     nav.className = "nav" + (onHero ? " on-hero" : " solid");
     nav.innerHTML = `
-      <a class="nav-brand wordmark" href="${base}index.html#inicio">MARQ<span class="mark"><span class="dot">.</span></span></a>
-      <nav aria-label="Principal"><ul class="nav-links">
-        <li><a href="${base}index.html#inicio">Inicio</a></li>
-        <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
-        <li><a href="${base}index.html#proyectos">Proyectos</a></li>
-        <li><a href="${base}index.html#servicios">Servicios</a></li>
-        <li><a href="${base}index.html#contacto">Contacto</a></li>
-      </ul></nav>
-      <div class="nav-cta">
-        <a class="icon-link hide-m" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">${ICONS.ig}</a>
+      <div class="nav-side nav-left">
+        <a class="icon-link" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">${ICONS.ig}</a>
         ${shopNav}
+      </div>
+      <a class="nav-brand wordmark" href="${base}index.html#inicio">MARQ<span class="mark"><span class="dot">.</span></span></a>
+      <div class="nav-side nav-right">
+        <nav aria-label="Principal"><ul class="nav-links">
+          <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
+          <li><a href="${base}index.html#proyectos">Proyectos</a></li>
+          <li><a href="${base}index.html#servicios">Servicios</a></li>
+          <li><a href="${base}index.html#contacto">Contacto</a></li>
+        </ul></nav>
         <button class="nav-toggle" aria-label="Menú" aria-expanded="false"><span></span><span></span></button>
       </div>`;
     document.body.prepend(nav);
