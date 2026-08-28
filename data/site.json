@@ -4,11 +4,11 @@
     "instagram": "https://www.instagram.com/_marq.estudio",
     "whatsapps": [
       {
-        "nombre": "Rosarito",
+        "nombre": "Rosario",
         "numero": "5493816438080"
       },
       {
-        "nombre": "Emi",
+        "nombre": "Emilia",
         "numero": "5493816360811"
       }
     ],
@@ -38,16 +38,16 @@
     "imagen": "assets/estudio/quienes-somos.jpg",
     "integrantes": [
       {
-        "nombre": "Rosarito",
+        "nombre": "Rosario",
         "rol": "Arquitecta · Cofundadora",
         "bio": "Completá una breve bio desde el panel de administración.",
-        "foto": "assets/equipo/rosarito.jpg"
+        "foto": "assets/equipo/rosario.jpg"
       },
       {
-        "nombre": "Emi",
+        "nombre": "Emilia",
         "rol": "Arquitecta · Cofundadora",
         "bio": "Completá una breve bio desde el panel de administración.",
-        "foto": "assets/equipo/emi.jpg"
+        "foto": "assets/equipo/emilia.jpg"
       }
     ]
   },
