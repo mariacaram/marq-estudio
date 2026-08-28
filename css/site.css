@@ -488,10 +488,11 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .form-block h4 {
   margin: 0 0 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--taupe);
 }
-.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 .chip {
-  padding: 0.7rem 1.25rem;
+  padding: 0.85rem 1.7rem;
   border: 1px solid var(--line); background: var(--surface);
+  border-radius: 999px;
   font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
   cursor: pointer;
   transition: border-color 0.3s, background 0.3s, color 0.3s, transform 0.3s var(--ease-out);
