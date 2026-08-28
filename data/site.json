@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "ajustes": {
+    "instagram": "https://www.instagram.com/_marq.estudio",
+    "whatsapps": [
+      { "nombre": "Rosarito", "numero": "5493816438080" },
+      { "nombre": "Emi", "numero": "5493816360811" }
+    ],
+    "email": "marq.estudio2@gmail.com",
+    "ecommerce": "",
+    "ubicacion": "Yerba Buena, Tucumán · Argentina",
+    "precioMinimoUSD": 1500,
+    "rangosPresupuesto": ["1.5k – 3k", "3k – 6k", "6k – 12k", "+12k"]
+  },
+  "inicio": {
+    "eslogan": "Espacios que inspiran\ny emocionan.",
+    "sub": "Arquitectura · Diseño de interiores · Yerba Buena",
+    "imagen": "Proyectos/casa-san-pablo/01.jpg"
+  },
+  "estudio": {
+    "titulo": "Diseño con propósito\ny carácter propio.",
+    "parrafos": [
+      "Somos Marq., un estudio de arquitectura y diseño de interiores con base en Yerba Buena, Tucumán. Transformamos espacios en experiencias que inspiran y emocionan.",
+      "Trabajamos con una mirada ecléctica que combina texturas, estilos y materialidades para crear ambientes únicos — lugares que se sienten, que se viven."
+    ],
+    "cita": "Cada proyecto es el resultado de un diálogo entre el espacio y quien lo habita.",
+    "imagen": "Proyectos/galeria-pradera/02.jpg",
+    "integrantes": [
+      {
+        "nombre": "Rosarito",
+        "rol": "Arquitecta · Cofundadora",
+        "bio": "Completá una breve bio desde el panel de administración.",
+        "foto": ""
+      },
+      {
+        "nombre": "Emi",
+        "rol": "Arquitecta · Cofundadora",
+        "bio": "Completá una breve bio desde el panel de administración.",
+        "foto": ""
+      }
+    ]
+  },
+  "servicios": {
+    "titulo": "Nuestros\nservicios.",
+    "intro": "Dos programas pensados para transformar tus espacios estés donde estés, con un profesional acompañándote en cada decisión.",
+    "items": [
+      {
+        "id": "refresh",
+        "nombre": "Refresh",
+        "desdeUSD": 400,
+        "bajada": "Ideal para quienes necesitan una guía paso a paso para darle vida a sus espacios, a su tiempo y sin obra.",
+        "para": [
+          "Querés hacer un cambio pero no sabés por dónde empezar",
+          "Querés renovar tus espacios sin hacer obra",
+          "Alquilás y dudás si vale la pena — spoiler: lo vale"
+        ],
+        "entregables": [
+          "Look & feel: imágenes de referencia para cada sector",
+          "Collage y moodboard para definir paleta de colores",
+          "Planilla de objetos, proveedores y listado de prioridades",
+          "Planos de muebles a medida, de ser necesarios"
+        ]
+      },
+      {
+        "id": "extreme-makeover",
+        "nombre": "Extreme Makeover",
+        "desdeUSD": 1500,
+        "bajada": "Nuestro programa más completo: un servicio integral de diseño que abarca todos los detalles — planos, estética, 3D y renders.",
+        "para": [
+          "Compraste una propiedad y querés sacarle el mayor provecho antes de mudarte",
+          "Necesitás un anteproyecto para después ejecutar la obra por tu cuenta",
+          "Querés un cambio profundo y poder visualizarlo con renders"
+        ],
+        "entregables": [
+          "Look & feel: imágenes de referencia para cada sector",
+          "Modelado 3D interactivo de todos los espacios, con interiorismo",
+          "Planos de distribución: antes y después",
+          "Renders realistas de los ambientes principales",
+          "Planilla personalizada de materiales para tu obra",
+          "Planos de vistas para muebles a medida",
+          "Planilla base de objetos y proveedores"
+        ]
+      }
+    ]
+  },
+  "proyectos": {
+    "titulo": "Proyectos\nseleccionados.",
+    "items": [
+      {
+        "slug": "casa-san-pablo",
+        "titulo": "Casa San Pablo TC",
+        "categoria": "Diseño de interiores",
+        "anio": "2025",
+        "portada": "01.jpg",
+        "intro": "Un living de doble altura donde la luz natural atraviesa las cortinas y define la atmósfera. Texturas suaves, grises profundos y madera para una casa que se vive de día y de noche.",
+        "fotos": [
+          { "src": "01.jpg", "tamano": "auto" },
+          { "src": "02.jpg", "tamano": "auto" },
+          { "src": "03.jpg", "tamano": "auto" },
+          { "src": "04.jpg", "tamano": "completa" },
+          { "src": "05.jpg", "tamano": "auto" },
+          { "src": "06.jpg", "tamano": "auto" },
+          { "src": "07.jpg", "tamano": "auto" },
+          { "src": "08.jpg", "tamano": "auto" },
+          { "src": "09.jpg", "tamano": "grande" },
+          { "src": "10.jpg", "tamano": "auto" },
+          { "src": "11.jpg", "tamano": "auto" },
+          { "src": "12.jpg", "tamano": "auto" }
+        ]
+      },
+      {
+        "slug": "oficinas",
+        "titulo": "Oficinas Docks L10",
+        "categoria": "Arquitectura comercial",
+        "anio": "2025",
+        "portada": "01.jpg",
+        "intro": "Un espacio de trabajo pensado para el encuentro: materiales nobles, iluminación cálida y una planta flexible que acompaña el ritmo del equipo.",
+        "fotos": [
+          { "src": "01.jpg", "tamano": "auto" },
+          { "src": "02.jpg", "tamano": "auto" },
+          { "src": "03.jpg", "tamano": "completa" },
+          { "src": "04.jpg", "tamano": "auto" },
+          { "src": "05.jpg", "tamano": "auto" },
+          { "src": "06.jpg", "tamano": "auto" },
+          { "src": "07.jpg", "tamano": "auto" },
+          { "src": "08.jpg", "tamano": "grande" },
+          { "src": "09.jpg", "tamano": "auto" },
+          { "src": "10.jpg", "tamano": "auto" },
+          { "src": "11.jpg", "tamano": "auto" },
+          { "src": "12.jpg", "tamano": "auto" },
+          { "src": "13.jpg", "tamano": "auto" }
+        ]
+      },
+      {
+        "slug": "galeria-pradera",
+        "titulo": "Galería Casa ML Praderas",
+        "categoria": "Diseño residencial",
+        "anio": "2025",
+        "portada": "01.jpg",
+        "intro": "La galería como corazón de la casa: un límite difuso entre interior y exterior, donde la sombra, el verde y la piedra arman el escenario de la vida en familia.",
+        "fotos": [
+          { "src": "01.jpg", "tamano": "auto" },
+          { "src": "02.jpg", "tamano": "auto" },
+          { "src": "03.jpg", "tamano": "auto" },
+          { "src": "04.jpg", "tamano": "completa" },
+          { "src": "05.jpg", "tamano": "auto" },
+          { "src": "06.jpg", "tamano": "auto" },
+          { "src": "07.jpg", "tamano": "auto" },
+          { "src": "08.jpg", "tamano": "auto" },
+          { "src": "09.jpg", "tamano": "grande" },
+          { "src": "10.jpg", "tamano": "auto" },
+          { "src": "11.jpg", "tamano": "auto" },
+          { "src": "12.jpg", "tamano": "auto" },
+          { "src": "13.jpg", "tamano": "completa" },
+          { "src": "14.jpg", "tamano": "auto" },
+          { "src": "15.jpg", "tamano": "auto" },
+          { "src": "16.jpg", "tamano": "auto" },
+          { "src": "17.jpg", "tamano": "auto" },
+          { "src": "18.jpg", "tamano": "auto" }
+        ]
+      },
+      {
+        "slug": "dormitorios-wi",
+        "titulo": "Dormitorios Casa WI",
+        "categoria": "Diseño de interiores",
+        "anio": "2025",
+        "portada": "01.jpg",
+        "intro": "Tres dormitorios, tres personalidades. Paletas serenas, textiles en capas y guardado a medida para que cada habitación cuente su propia historia.",
+        "fotos": [
+          { "src": "01.jpg", "tamano": "auto" },
+          { "src": "02.jpg", "tamano": "auto" },
+          { "src": "03.jpg", "tamano": "auto" },
+          { "src": "04.jpg", "tamano": "grande" },
+          { "src": "05.jpg", "tamano": "auto" },
+          { "src": "06.jpg", "tamano": "auto" },
+          { "src": "07.jpg", "tamano": "completa" },
+          { "src": "08.jpg", "tamano": "auto" },
+          { "src": "09.jpg", "tamano": "auto" },
+          { "src": "10.jpg", "tamano": "auto" },
+          { "src": "11.jpg", "tamano": "auto" },
+          { "src": "12.jpg", "tamano": "auto" },
+          { "src": "13.jpg", "tamano": "auto" },
+          { "src": "14.jpg", "tamano": "auto" }
+        ]
+      }
+    ]
+  },
+  "contacto": {
+    "titulo": "Hagamos un\ngran cambio.",
+    "intro": "Nos encanta conocer nuevas ideas y espacios por transformar. Contanos qué tenés en mente y te respondemos por WhatsApp.",
+    "necesidades": [
+      "Refresh",
+      "Extreme Makeover",
+      "Obra / proyecto integral",
+      "Asesoría puntual"
+    ]
+  }
+}

@@ -9,3 +9,7 @@ img/
 Logo/
 Fotos quienes somos/
 .claude/
+
+# Fuente comercial completa (solo local; el sitio usa assets/fonts/canaro)
+CANARO/
+.DS_Store

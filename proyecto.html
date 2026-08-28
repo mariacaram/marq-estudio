@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyecto — Marq. Estudio</title>
+<meta name="description" content="Proyecto de Marq. Estudio — arquitectura y diseño de interiores.">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<main id="app" style="min-height:100svh"></main>
+
+<script src="js/site.js"></script>
+<script src="js/gallery.js"></script>
+<script>
+(async function () {
+  const { loadData, renderChrome, initReveals, escapeHtml } = window.MARQ;
+
+  let data;
+  try { data = await loadData(); }
+  catch (e) {
+    document.getElementById("app").innerHTML =
+      '<p style="padding:8rem 2rem;text-align:center;color:#7A756E">No pudimos cargar el contenido. Recargá la página en unos segundos.</p>';
+    console.error(e); return;
+  }
+
+  const slug = new URLSearchParams(location.search).get("p");
+  const items = data.proyectos.items;
+  const idx = Math.max(0, items.findIndex(p => p.slug === slug));
+  const proj = items[idx];
+  const next = items[(idx + 1) % items.length];
+
+  document.title = proj.titulo + " — Marq. Estudio";
+
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <div class="proj-band reveal in">
+      <span class="mark"><span class="dot">.</span>M</span>
+      <h1>${escapeHtml(proj.categoria)} · ${escapeHtml(proj.anio)}<br><strong>${escapeHtml(proj.titulo)}</strong></h1>
+    </div>
+    <figure class="proj-cover reveal-img" style="margin:0">
+      <img src="Proyectos/${escapeHtml(proj.slug)}/${escapeHtml(proj.portada)}" alt="${escapeHtml(proj.titulo)}" fetchpriority="high">
+    </figure>
+    <div class="wrap">
+      <div class="proj-intro">
+        <div class="meta reveal">
+          <span>Proyecto</span><strong>${escapeHtml(proj.titulo)}</strong>
+          <span style="margin-top:0.8rem">Categoría</span><strong>${escapeHtml(proj.categoria)}</strong>
+          <span style="margin-top:0.8rem">Año</span><strong>${escapeHtml(proj.anio)}</strong>
+        </div>
+        <p class="lead reveal">${escapeHtml(proj.intro)}</p>
+      </div>
+      <div id="galeria"></div>
+    </div>
+    <section class="proj-next">
+      <span class="label">Siguiente proyecto</span>
+      <a class="next-title" href="proyecto.html?p=${encodeURIComponent(next.slug)}">${escapeHtml(next.titulo)} →</a>
+    </section>`;
+
+  renderChrome(data, { onHero: false, base: "" });
+
+  const fotos = proj.fotos.map(f => ({
+    src: `Proyectos/${proj.slug}/${f.src}`,
+    tamano: f.tamano || "auto",
+    alt: proj.titulo
+  }));
+  window.MARQGallery.buildJustified(document.getElementById("galeria"), fotos);
+  initReveals();
+})();
+</script>
+</body>
+</html>

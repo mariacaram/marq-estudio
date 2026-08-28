@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel Marq. — Administración</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
+<style>
+  @font-face { font-family: "Canaro"; src: url("../assets/fonts/canaro/Canaro-Book.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Canaro"; src: url("../assets/fonts/canaro/Canaro-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Canaro"; src: url("../assets/fonts/canaro/Canaro-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: "Canaro"; src: url("../assets/fonts/canaro/Canaro-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+
+  :root {
+    --bg: #FAF9F7; --surface: #fff; --ink: #1C1B19; --soft: #57534D; --taupe: #7A756E;
+    --line: #E7E4DE; --ok: #2E7D50; --err: #B3402E;
+    --irid: linear-gradient(90deg,#BFD9EE,#CCC2E6,#C2DACB,#EFE6C4);
+    --ease: cubic-bezier(0.16,1,0.3,1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Canaro", "Avenir Next", system-ui, sans-serif;
+    font-size: 15.5px; line-height: 1.55; -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3 { font-weight: 500; letter-spacing: 0.04em; }
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.9rem 1.4rem; background: rgba(250,249,247,0.92);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  }
+  .brand { font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; font-size: 0.95rem; }
+  .brand .dot { background: var(--irid); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+  .brand small { color: var(--taupe); letter-spacing: 0.2em; font-weight: 500; margin-left: 0.6rem; }
+  .top-actions { display: flex; gap: 0.6rem; align-items: center; }
+
+  main { max-width: 1080px; margin: 0 auto; padding: 1.6rem 1.4rem 6rem; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0 1.6rem; }
+  .tab {
+    border: 1px solid var(--line); background: var(--surface); color: var(--soft);
+    padding: 0.55rem 1.1rem; font-family: inherit; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s var(--ease);
+  }
+  .tab:hover { border-color: var(--ink); color: var(--ink); }
+  .tab.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    padding: 1.4rem; margin-bottom: 1.2rem; position: relative;
+  }
+  .card h2 { margin: 0 0 0.3rem; font-size: 1.15rem; text-transform: uppercase; }
+  .card h3 { margin: 1.4rem 0 0.5rem; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); font-weight: 600; }
+  .card .help { color: var(--taupe); font-size: 0.85rem; margin: 0 0 1rem; }
+
+  label.f { display: block; margin-top: 0.9rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--taupe); }
+  input[type=text], input[type=number], input[type=password], input[type=url], textarea, select {
+    width: 100%; margin-top: 0.35rem; padding: 0.7rem 0.85rem;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+    font-family: inherit; font-size: 0.95rem;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--ink); }
+  textarea { resize: vertical; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.2rem; }
+  @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--ink); background: var(--ink); color: #fff;
+    padding: 0.7rem 1.3rem; font-family: inherit; font-size: 0.74rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s var(--ease);
+  }
+  .btn:hover { background: transparent; color: var(--ink); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: #fff; }
+  .btn.danger { border-color: var(--err); background: transparent; color: var(--err); }
+  .btn.danger:hover { background: var(--err); color: #fff; }
+  .btn.small { padding: 0.4rem 0.8rem; font-size: 0.66rem; }
+  .btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+  .savebar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: rgba(28,27,25,0.96); color: #fff;
+    display: none; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.8rem 1.4rem;
+  }
+  .savebar.show { display: flex; }
+  .savebar .msg { font-size: 0.85rem; opacity: 0.85; }
+  .savebar .btn { background: #fff; color: var(--ink); border-color: #fff; }
+  .savebar .btn:hover { background: transparent; color: #fff; }
+
+  .toast {
+    position: fixed; top: 4.4rem; right: 1.2rem; z-index: 50;
+    background: var(--ink); color: #fff; padding: 0.8rem 1.2rem;
+    font-size: 0.85rem; opacity: 0; translate: 0 -8px; transition: all 0.35s var(--ease);
+    max-width: 22rem; border-left: 3px solid transparent;
+    border-image: var(--irid) 1;
+  }
+  .toast.show { opacity: 1; translate: 0 0; }
+  .toast.err { background: var(--err); }
+
+  /* proyectos */
+  .plist { display: grid; gap: 0.6rem; }
+  .pitem {
+    display: flex; align-items: center; gap: 1rem;
+    border: 1px solid var(--line); background: var(--surface); padding: 0.7rem 0.9rem;
+    cursor: pointer; transition: border-color 0.2s;
+  }
+  .pitem:hover { border-color: var(--ink); }
+  .pitem img { width: 74px; height: 52px; object-fit: cover; background: var(--line); }
+  .pitem .t { font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.92rem; }
+  .pitem .c { color: var(--taupe); font-size: 0.78rem; }
+  .pitem .spacer { flex: 1; }
+
+  .fotogrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+  .foto {
+    border: 1px solid var(--line); background: var(--surface); padding: 0.5rem;
+    display: grid; gap: 0.45rem; position: relative;
+  }
+  .foto.dragging { opacity: 0.4; }
+  .foto.dropzone { outline: 2px dashed var(--taupe); }
+  .foto img { width: 100%; aspect-ratio: 4/3; object-fit: cover; cursor: grab; }
+  .foto .n { position: absolute; top: 0.7rem; left: 0.7rem; background: rgba(28,27,25,0.75); color: #fff; font-size: 0.68rem; padding: 0.15rem 0.5rem; letter-spacing: 0.1em; }
+  .foto select { padding: 0.35rem 0.5rem; font-size: 0.8rem; margin: 0; }
+  .foto .rowbtns { display: flex; gap: 0.3rem; justify-content: space-between; }
+  .foto .rowbtns button {
+    flex: 1; border: 1px solid var(--line); background: var(--bg); cursor: pointer;
+    font-family: inherit; font-size: 0.75rem; padding: 0.3rem 0.2rem; color: var(--soft);
+  }
+  .foto .rowbtns button:hover { border-color: var(--ink); color: var(--ink); }
+  .foto .rowbtns button.del:hover { border-color: var(--err); color: var(--err); }
+  .foto .portada-flag { position: absolute; top: 0.7rem; right: 0.7rem; background: #fff; color: var(--ink); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.45rem; border: 1px solid var(--line); }
+
+  .dropfile {
+    margin-top: 1.2rem; border: 2px dashed var(--line); padding: 2rem; text-align: center;
+    color: var(--taupe); cursor: pointer; transition: border-color 0.25s, background 0.25s;
+  }
+  .dropfile:hover, .dropfile.over { border-color: var(--taupe); background: #F4F2EE; }
+  .dropfile input { display: none; }
+
+  .list-edit { display: grid; gap: 0.5rem; }
+  .list-edit .li { display: flex; gap: 0.5rem; align-items: center; }
+  .list-edit input { margin: 0; }
+  .list-edit button { border: 1px solid var(--line); background: var(--bg); cursor: pointer; font-family: inherit; padding: 0.55rem 0.7rem; color: var(--soft); }
+  .list-edit button:hover { color: var(--err); border-color: var(--err); }
+
+  .login-wrap { max-width: 540px; margin: 8vh auto 0; }
+  .login-wrap .mark { font-size: 3rem; font-weight: 600; }
+  details.ayuda { margin-top: 1.2rem; border: 1px solid var(--line); background: var(--surface); padding: 0.9rem 1.1rem; }
+  details.ayuda summary { cursor: pointer; font-weight: 500; }
+  details.ayuda ol { padding-left: 1.2rem; }
+  details.ayuda li { margin: 0.45rem 0; font-size: 0.9rem; color: var(--soft); }
+  code { background: #F0EEE9; padding: 0.1rem 0.4rem; font-size: 0.85em; }
+  .hidden { display: none !important; }
+  .loading-overlay {
+    position: fixed; inset: 0; z-index: 100; background: rgba(250,249,247,0.85);
+    display: grid; place-items: center; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe);
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="brand"><span class="dot">.</span>MARQ <small>PANEL</small></span>
+  <div class="top-actions">
+    <a class="btn ghost small" href="../index.html" target="_blank" rel="noopener">Ver la página</a>
+    <button class="btn ghost small hidden" id="btn-logout">Salir</button>
+  </div>
+</header>
+
+<main>
+  <!-- ===== LOGIN ===== -->
+  <section id="view-login" class="login-wrap">
+    <p class="brand" style="font-size:1.4rem"><span class="dot">.</span>M</p>
+    <h1 style="margin:0.4rem 0 0.2rem">Panel de administración</h1>
+    <p class="help" style="color:var(--taupe)">Desde acá editás la página: fotos, textos, servicios, precios y datos de contacto. Los cambios quedan online en aproximadamente un minuto.</p>
+    <div class="card">
+      <label class="f" for="token">Clave de acceso (token de GitHub)</label>
+      <input type="password" id="token" placeholder="github_pat_…" autocomplete="off">
+      <div style="margin-top:1rem; display:flex; gap:0.6rem; align-items:center">
+        <button class="btn" id="btn-login">Entrar</button>
+        <label style="font-size:0.85rem; color:var(--taupe)"><input type="checkbox" id="remember" checked style="width:auto"> Recordarme en esta compu</label>
+      </div>
+      <details class="ayuda">
+        <summary>¿Cómo consigo mi clave? (una sola vez)</summary>
+        <ol>
+          <li>Entrá a <code>github.com</code> con la cuenta del estudio e iniciá sesión.</li>
+          <li>Andá a <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong>.</li>
+          <li>Nombre: <code>Panel Marq</code>. Expiración: elegí 1 año.</li>
+          <li>En <strong>Repository access</strong> elegí <em>Only select repositories</em> y marcá <code>marq-estudio</code>.</li>
+          <li>En <strong>Permissions → Repository permissions → Contents</strong> elegí <em>Read and write</em>.</li>
+          <li>Tocá <strong>Generate token</strong>, copiá la clave que empieza con <code>github_pat_</code> y pegala acá arriba.</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== PANEL ===== -->
+  <section id="view-panel" class="hidden">
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="proyectos">Proyectos</button>
+      <button class="tab" data-tab="inicio">Inicio</button>
+      <button class="tab" data-tab="estudio">Estudio</button>
+      <button class="tab" data-tab="servicios">Servicios</button>
+      <button class="tab" data-tab="contacto">Contacto</button>
+      <button class="tab" data-tab="ajustes">Ajustes</button>
+    </div>
+    <div id="tab-content"></div>
+  </section>
+</main>
+
+<div class="savebar" id="savebar">
+  <span class="msg">Tenés cambios sin publicar.</span>
+  <div style="display:flex; gap:0.6rem">
+    <button class="btn ghost" id="btn-discard" style="border-color:#fff;color:#fff">Descartar</button>
+    <button class="btn" id="btn-save">Publicar cambios</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/admin.js"></script>
+</body>
+</html>
