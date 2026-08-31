@@ -58,10 +58,14 @@
       let h = (W - gaps) / sumAr;
       if (!justify) h = Math.min(h, targetH); // última fila: no estirar de más
       else h = Math.min(h, targetH * 1.6);
+      // filas justificadas: repartir el ancho completo aunque la altura esté
+      // limitada (object-fit: cover absorbe la diferencia) para que el borde
+      // derecho de todas las filas quede alineado, sin escalones
+      const usable = W - gaps;
       const rowEl = document.createElement("div");
       rowEl.className = "jrow";
       row.forEach(it => {
-        const w = it.ar * h;
+        const w = justify ? usable * (it.ar / sumAr) : it.ar * h;
         const item = document.createElement("figure");
         item.className = "jitem reveal-img";
         item.style.width = w + "px";
