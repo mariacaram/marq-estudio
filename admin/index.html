@@ -179,22 +179,16 @@
     <h1 style="margin:0.4rem 0 0.2rem">Panel de administración</h1>
     <p class="help" style="color:var(--taupe)">Desde acá editás la página: fotos, textos, servicios, precios y datos de contacto. Los cambios quedan online en aproximadamente un minuto.</p>
     <div class="card">
-      <label class="f" for="token">Clave de acceso (token de GitHub)</label>
-      <input type="password" id="token" placeholder="github_pat_…" autocomplete="off">
+      <label class="f" for="token">Contraseña</label>
+      <input type="password" id="token" placeholder="La contraseña del panel" autocomplete="current-password">
       <div style="margin-top:1rem; display:flex; gap:0.6rem; align-items:center">
         <button class="btn" id="btn-login">Entrar</button>
         <label style="font-size:0.85rem; color:var(--taupe)"><input type="checkbox" id="remember" checked style="width:auto"> Recordarme en esta compu</label>
       </div>
       <details class="ayuda">
-        <summary>¿Cómo consigo mi clave? (una sola vez)</summary>
-        <ol>
-          <li>Entrá a <code>github.com</code> con la cuenta del estudio e iniciá sesión.</li>
-          <li>Andá a <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong>.</li>
-          <li>Nombre: <code>Panel Marq</code>. Expiración: elegí 1 año.</li>
-          <li>En <strong>Repository access</strong> elegí <em>Only select repositories</em> y marcá <code>marq-estudio</code>.</li>
-          <li>En <strong>Permissions → Repository permissions → Contents</strong> elegí <em>Read and write</em>.</li>
-          <li>Tocá <strong>Generate token</strong>, copiá la clave que empieza con <code>github_pat_</code> y pegala acá arriba.</li>
-        </ol>
+        <summary>¿No tenés la contraseña?</summary>
+        <p>Pedísela a quien administra el sitio. Si hay que cambiarla, se hace desde Vercel:
+        proyecto <code>marq-estudio</code> → Settings → Environment Variables → <code>ADMIN_PASSWORD</code>.</p>
       </details>
     </div>
   </section>
@@ -223,6 +217,6 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="../js/admin.js"></script>
+<script src="../js/admin.js?v=2"></script>
 </body>
 </html>

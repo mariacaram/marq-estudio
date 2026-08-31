@@ -1,12 +1,10 @@
-/* Panel Marq. — administración vía API de GitHub (sin servidores) */
+/* Panel Marq. — administración con contraseña.
+   Habla con /api/gh (función en Vercel) que guarda el token real de GitHub. */
 (function () {
   "use strict";
 
-  /* ===== Configuración del repositorio ===== */
-  const OWNER = "mariacaram";
-  const REPO = "marq-estudio";
   const BRANCH = "master";
-  const API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
+  const API = "/api/gh";
   const MAX_IMG = 1600;        // lado máximo al subir fotos
   const JPEG_Q = 0.82;
 
@@ -58,29 +56,25 @@
     return new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
   }
 
-  /* ===== API GitHub ===== */
+  /* ===== API (vía /api/gh, el token real queda en el servidor) ===== */
   async function gh(path, opts) {
-    const res = await fetch(API + path + (opts && opts.method ? "" : `?ref=${BRANCH}&t=${Date.now()}`), {
-      headers: {
-        "Authorization": "Bearer " + token,
-        "Accept": "application/vnd.github+json",
-        ...(opts && opts.body ? { "Content-Type": "application/json" } : {})
-      },
-      ...(opts || {})
+    const method = (opts && opts.method) || "GET";
+    const res = await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clave: token, path, method, ref: BRANCH, body: opts && opts.body })
     });
-    if (res.status === 404 && (!opts || !opts.method)) return null;
-    if (!res.ok) {
-      const detail = await res.json().catch(() => ({}));
-      throw new Error(detail.message || ("Error " + res.status));
-    }
-    return res.json();
+    if (res.status === 404 && method === "GET") return null;
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.message || ("Error " + res.status));
+    return json;
   }
 
   async function ghPut(path, contentB64, message, sha) {
     try {
       return await gh(path, {
         method: "PUT",
-        body: JSON.stringify({ message, content: contentB64, branch: BRANCH, ...(sha ? { sha } : {}) })
+        body: { message, content: contentB64, branch: BRANCH, ...(sha ? { sha } : {}) }
       });
     } catch (e) {
       // Si el archivo ya existe y no teníamos su sha, lo buscamos y reintentamos (sobrescribir)
@@ -89,7 +83,7 @@
         if (existing && existing.sha) {
           return gh(path, {
             method: "PUT",
-            body: JSON.stringify({ message, content: contentB64, branch: BRANCH, sha: existing.sha })
+            body: { message, content: contentB64, branch: BRANCH, sha: existing.sha }
           });
         }
       }
@@ -100,7 +94,7 @@
   async function ghDelete(path, message, sha) {
     return gh(path, {
       method: "DELETE",
-      body: JSON.stringify({ message, sha, branch: BRANCH })
+      body: { message, sha, branch: BRANCH }
     });
   }
 
@@ -165,14 +159,14 @@
       renderTab();
     } catch (e) {
       token = "";
-      if (!silent) toast("No pudimos entrar: " + e.message + ". Revisá la clave.", true);
+      if (!silent) toast("No pudimos entrar: " + e.message, true);
       localStorage.removeItem("marq-token");
     } finally { overlay(false); }
   }
 
   $("#btn-login").addEventListener("click", () => {
     const tk = $("#token").value.trim();
-    if (!tk) { toast("Pegá tu clave de acceso.", true); return; }
+    if (!tk) { toast("Escribí la contraseña.", true); return; }
     tryLogin(tk);
   });
   $("#token").addEventListener("keydown", e => { if (e.key === "Enter") $("#btn-login").click(); });
