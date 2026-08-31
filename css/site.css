@@ -275,7 +275,14 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 }
 .hero-inner { position: relative; z-index: 2; text-align: center; padding: 0 var(--gutter); }
 .hero .hero-mark { height: clamp(4rem, 9vw, 6.4rem); width: auto; display: block; margin: 0 auto 1.7rem; filter: drop-shadow(0 2px 18px rgba(0,0,0,0.3)); }
-.hero .display { margin-top: 0; text-shadow: 0 2px 24px rgba(0,0,0,0.3); }
+.hero .display {
+  margin-top: 0;
+  font-size: clamp(1.15rem, 2.4vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  line-height: 1.4;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+}
 
 /* Entrada del hero: la marca aparece, el eslogan sube línea por línea */
 .hero .hero-mark, .hero-sub, .hero-scroll { opacity: 0; animation: hero-fade 1.4s var(--ease-out) forwards; }
