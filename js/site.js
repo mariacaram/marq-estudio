@@ -40,7 +40,7 @@
     const nav = document.createElement("header");
     nav.className = "nav" + (onHero ? " on-hero" : " solid");
     nav.innerHTML = `
-      <a class="nav-brand" href="${base}index.html#inicio"><img src="${base}assets/brand/logo-abr-color.svg" alt="Marq. Estudio"></a>
+      <a class="nav-brand" href="${base}index.html#inicio"><img src="${base}assets/brand/m-celeste.svg" alt="Marq. Estudio"></a>
       <div class="nav-side nav-right">
         <nav aria-label="Principal"><ul class="nav-links">
           <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
@@ -96,7 +96,7 @@
       <div class="footer-inner">
         <div>
           <div class="footer-brand">
-            <img class="footer-logo" src="${base}assets/brand/logo-marq-neg.svg" alt="Marq. Estudio">
+            <img class="footer-logo" src="${base}assets/brand/logo-marq-blanco.svg" alt="Marq. Estudio">
             <span class="footer-tag">Arquitectura<br>&amp; Diseño</span>
           </div>
           <p class="fine" style="margin:1rem 0 0">${escapeHtml(aj.ubicacion)}</p>
