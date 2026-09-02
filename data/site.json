@@ -31,7 +31,7 @@
   "estudio": {
     "titulo": "Diseño con propósito\ny carácter propio.",
     "parrafos": [
-      "Somos Marq., un estudio de arquitectura y diseño de interiores con base en Yerba Buena, Tucumán. Transformamos espacios en experiencias que inspiran y emocionan.",
+      "Somos Marq., un estudio de arquitectura e interiorismo con base en Yerba Buena, Tucumán. Transformamos espacios en experiencias que inspiran y emocionan.",
       "Trabajamos con una mirada ecléctica que combina texturas, estilos y materialidades para crear ambientes únicos — lugares que se sienten, que se viven."
     ],
     "cita": "Cada proyecto es el resultado de un diálogo entre el espacio y quien lo habita.",
@@ -100,7 +100,7 @@
       {
         "slug": "casa-san-pablo",
         "titulo": "Casa San Pablo TC",
-        "categoria": "Diseño de interiores",
+        "categoria": "Interiorismo",
         "anio": "2025",
         "portada": "01.jpg",
         "intro": "Un living de doble altura donde la luz natural atraviesa las cortinas y define la atmósfera. Texturas suaves, grises profundos y madera para una casa que se vive de día y de noche.",
@@ -302,7 +302,7 @@
       {
         "slug": "dormitorios-wi",
         "titulo": "Dormitorios Casa WI",
-        "categoria": "Diseño de interiores",
+        "categoria": "Interiorismo",
         "anio": "2025",
         "portada": "01.jpg",
         "intro": "Tres dormitorios, tres personalidades. Paletas serenas, textiles en capas y guardado a medida para que cada habitación cuente su propia historia.",
