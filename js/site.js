@@ -40,10 +40,7 @@
     const nav = document.createElement("header");
     nav.className = "nav" + (onHero ? " on-hero" : " solid");
     nav.innerHTML = `
-      <div class="nav-side nav-left">
-        ${shopNav}
-      </div>
-      <a class="nav-brand" href="${base}index.html#inicio"><img src="${base}assets/brand/logo-marq.svg" alt="Marq. Estudio"></a>
+      <a class="nav-brand" href="${base}index.html#inicio"><img src="${base}assets/brand/logo-abr-color.svg" alt="Marq. Estudio"></a>
       <div class="nav-side nav-right">
         <nav aria-label="Principal"><ul class="nav-links">
           <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
@@ -51,6 +48,7 @@
           <li><a href="${base}index.html#servicios">Servicios</a></li>
           <li><a href="${base}index.html#contacto">Contacto</a></li>
         </ul></nav>
+        ${shopNav}
         <button class="nav-toggle" aria-label="Menú" aria-expanded="false"><span></span><span></span></button>
       </div>`;
     document.body.prepend(nav);
@@ -97,8 +95,11 @@
     foot.innerHTML = `
       <div class="footer-inner">
         <div>
-          <img class="footer-logo" src="${base}assets/brand/logo-marq-blanco.svg" alt="Marq. Estudio">
-          <p class="fine" style="margin:1.1rem 0 0">Arquitectura &amp; Diseño — ${escapeHtml(aj.ubicacion)}</p>
+          <div class="footer-brand">
+            <img class="footer-logo" src="${base}assets/brand/logo-marq-neg.svg" alt="Marq. Estudio">
+            <span class="footer-tag">Arquitectura<br>&amp; Diseño</span>
+          </div>
+          <p class="fine" style="margin:1rem 0 0">${escapeHtml(aj.ubicacion)}</p>
         </div>
         <nav aria-label="Redes">
           <a href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener">Instagram</a>
@@ -117,7 +118,7 @@
     sessionStorage.setItem("marq-visited", "1");
     const p = document.createElement("div");
     p.className = "preloader";
-    p.innerHTML = `<div><img class="pre-mark" src="assets/brand/m-pos.svg" alt="Marq."><div class="bar"></div></div>`;
+    p.innerHTML = `<div><img class="pre-mark" src="assets/brand/m-celeste.svg" alt="Marq."><div class="bar"></div></div>`;
     document.body.appendChild(p);
     setTimeout(() => { p.classList.add("done"); setTimeout(() => p.remove(), 900); }, 1650);
   }

@@ -121,13 +121,6 @@ button { font-family: inherit; }
   color: var(--taupe);
   margin: 0 0 1.4rem;
 }
-.kicker::before {
-  content: "";
-  width: 2.6rem;
-  height: 6px;
-  background: var(--irid);
-  border-radius: 4px;
-}
 .lead { font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--ink-soft); max-width: 34em; }
 
 /* ---------- Marca ---------- */
@@ -160,7 +153,7 @@ button { font-family: inherit; }
   transition: opacity 0.7s var(--ease-soft), visibility 0.7s;
 }
 .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-.preloader .pre-mark { height: clamp(4.6rem, 11vw, 7rem); width: auto; margin-inline: auto; display: block; opacity: 0; animation: pre-in 0.9s var(--ease-out) 0.1s forwards; }
+.preloader .pre-mark { height: clamp(3.4rem, 8vw, 5rem); width: auto; margin-inline: auto; display: block; opacity: 0; animation: pre-in 0.9s var(--ease-out) 0.1s forwards; }
 .preloader .bar {
   width: min(340px, 60vw); height: 1px; background: var(--line);
   margin-top: 2rem; position: relative; overflow: hidden;
@@ -177,7 +170,7 @@ button { font-family: inherit; }
 /* ---------- Navegación ---------- */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  display: flex; align-items: center; justify-content: space-between;
   gap: 1rem;
   padding: 1.1rem var(--gutter);
   transition: background 0.5s var(--ease-soft), box-shadow 0.5s, padding 0.5s, color 0.4s;
@@ -191,11 +184,9 @@ button { font-family: inherit; }
   box-shadow: 0 1px 0 var(--line);
   padding-block: 0.8rem;
 }
-.nav-side { display: flex; align-items: center; gap: 0.9rem; }
-.nav-left { justify-content: flex-start; }
-.nav-right { justify-content: flex-end; }
-.nav-brand { z-index: 2; justify-self: center; display: block; }
-.nav-brand img { height: clamp(1.9rem, 3vw, 2.3rem); width: auto; display: block; }
+.nav-side { display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.6rem); }
+.nav-brand { z-index: 2; display: block; }
+.nav-brand img { height: clamp(1.5rem, 2.6vw, 1.9rem); width: auto; display: block; }
 .nav-links { display: flex; gap: clamp(1rem, 2.4vw, 2.2rem); list-style: none; margin: 0; padding: 0; }
 .nav-links a {
   font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
@@ -274,7 +265,11 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   background: linear-gradient(180deg, rgba(20,19,17,0.30) 0%, rgba(20,19,17,0.12) 42%, rgba(20,19,17,0.36) 100%);
 }
 .hero-inner { position: relative; z-index: 2; text-align: center; padding: 0 var(--gutter); }
-.hero .hero-mark { height: clamp(4rem, 9vw, 6.4rem); width: auto; display: block; margin: 0 auto 1.7rem; filter: drop-shadow(0 2px 18px rgba(0,0,0,0.3)); }
+.hero .hero-mark { height: clamp(3rem, 6.5vw, 4.6rem); width: auto; display: block; margin: 0 auto 1.3rem; filter: drop-shadow(0 2px 14px rgba(0,0,0,0.35)); }
+.hero-line {
+  display: block; width: clamp(6.5rem, 13vw, 10rem); height: 2px;
+  background: var(--irid); margin: 0 auto 1.7rem;
+}
 .hero .display {
   margin-top: 0;
   font-size: clamp(1.15rem, 2.4vw, 1.8rem);
@@ -285,8 +280,9 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 }
 
 /* Entrada del hero: la marca aparece, el eslogan sube línea por línea */
-.hero .hero-mark, .hero-sub, .hero-scroll { opacity: 0; animation: hero-fade 1.4s var(--ease-out) forwards; }
+.hero .hero-mark, .hero-line, .hero-sub, .hero-scroll { opacity: 0; animation: hero-fade 1.4s var(--ease-out) forwards; }
 .hero .hero-mark { animation-delay: 0.35s; }
+.hero-line { animation-delay: 0.55s; }
 .hero-sub { animation-delay: 1.9s; }
 .hero-scroll { animation-delay: 2.4s; }
 .hero .hl { display: block; overflow: clip; }
@@ -294,7 +290,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 @keyframes hero-line { to { transform: none; } }
 @keyframes hero-fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .hero .hero-mark, .hero-sub, .hero-scroll, .hero .hl > span { animation: none; opacity: 1; transform: none; }
+  .hero .hero-mark, .hero-line, .hero-sub, .hero-scroll, .hero .hl > span { animation: none; opacity: 1; transform: none; }
   .hero-media img { animation: none; transform: none; }
 }
 .hero-sub {
@@ -655,7 +651,9 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 }
 .footer .wordmark { font-size: 1.3rem; }
 .footer nav { display: flex; flex-wrap: wrap; gap: 1.4rem; }
-.footer-logo { height: clamp(2rem, 3.5vw, 2.6rem); width: auto; display: block; }
+.footer-brand { display: flex; align-items: center; gap: 0.9rem; }
+.footer-logo { height: clamp(1.3rem, 2.4vw, 1.6rem); width: auto; display: block; }
+.footer-tag { font-size: 0.56rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #A8A29A; line-height: 1.5; }
 .footer nav a { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #A8A29A; transition: color 0.3s; }
 .footer nav a:hover { color: var(--band-ink); }
 .footer .fine { font-size: 0.78rem; color: #8F8A82; }
@@ -683,7 +681,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   padding: clamp(1.4rem, 3vw, 2rem) var(--gutter);
   display: flex; align-items: center; justify-content: space-between; gap: 1.4rem;
 }
-.proj-band .band-mark { height: clamp(2.6rem, 5vw, 3.6rem); width: auto; }
+.proj-band .band-mark { height: clamp(1.7rem, 3.4vw, 2.3rem); width: auto; }
 .proj-band h1 {
   margin: 0; font-size: clamp(0.95rem, 2.4vw, 1.4rem);
   font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
