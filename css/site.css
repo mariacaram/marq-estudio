@@ -59,6 +59,8 @@
   --band: #2B2926;
   --band-ink: #F4F2EE;
   --irid: linear-gradient(90deg, #BFD9EE 0%, #CCC2E6 30%, #C2DACB 62%, #EFE6C4 100%);
+  --irid-line: linear-gradient(90deg, transparent 0%, #BFD9EE 16%, #CCC2E6 40%, #C2DACB 62%, #EFE6C4 84%, transparent 100%);
+  --edge: max(var(--gutter), calc((100% - var(--max)) / 2));
   --font: "Canaro", "Avenir Next", "Century Gothic", system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -160,7 +162,7 @@ button { font-family: inherit; }
 }
 .preloader .bar::after {
   content: ""; position: absolute; inset: 0;
-  background: var(--irid);
+  background: var(--irid-line);
   transform: translateX(-101%);
   animation: pre-bar 1.15s var(--ease-soft) 0.25s forwards;
 }
@@ -172,7 +174,7 @@ button { font-family: inherit; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem;
-  padding: 1.1rem var(--gutter);
+  padding: 1.1rem var(--edge);
   transition: background 0.5s var(--ease-soft), box-shadow 0.5s, padding 0.5s, color 0.4s;
 }
 .nav.on-hero { color: #fff; }
@@ -268,7 +270,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .hero .hero-mark { height: clamp(3rem, 6.5vw, 4.6rem); width: auto; display: block; margin: 0 auto 1.3rem; filter: drop-shadow(0 2px 14px rgba(0,0,0,0.35)); }
 .hero-line {
   display: block; width: clamp(6.5rem, 13vw, 10rem); height: 2px;
-  background: var(--irid); margin: 0 auto 1.7rem;
+  background: var(--irid-line); margin: 0 auto 1.7rem;
 }
 .hero .display {
   margin-top: 0;
@@ -641,7 +643,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   background: var(--band);
   color: var(--band-ink);
   border-top: 1px solid rgba(244,242,238,0.12);
-  padding: clamp(2.4rem, 6vw, 4rem) var(--gutter);
+  padding: clamp(2.4rem, 6vw, 4rem) var(--edge);
   display: grid; gap: 2rem;
 }
 .footer-inner {
@@ -678,7 +680,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .proj-band {
   margin-top: 4.6rem;
   background: var(--band); color: var(--band-ink);
-  padding: clamp(1.4rem, 3vw, 2rem) var(--gutter);
+  padding: clamp(1.4rem, 3vw, 2rem) var(--edge);
   display: flex; align-items: center; justify-content: space-between; gap: 1.4rem;
 }
 .proj-band .band-mark { height: clamp(1.7rem, 3.4vw, 2.3rem); width: auto; }
