@@ -143,17 +143,31 @@
       if (el.getBoundingClientRect().top + window.scrollY < limitY + margen) el.classList.add("in");
     });
   }
+  let animRaf = null;
   function animateScrollTo(y) {
     document.body.classList.add("nav-scroll");
     revealUpTo(Math.max(y, window.scrollY));
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
-    // liberar la suspensión de transiciones cuando el scroll se asienta
-    let t;
-    const done = () => { window.removeEventListener("scroll", onScroll); document.body.classList.remove("nav-scroll"); };
-    const onScroll = () => { clearTimeout(t); t = setTimeout(done, 150); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    t = setTimeout(done, 1500);
+    const done = () => setTimeout(() => document.body.classList.remove("nav-scroll"), 80);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { window.scrollTo(0, y); done(); return; }
+    cancelAnimationFrame(animRaf);
+    const start = window.scrollY;
+    const dist = y - start;
+    if (Math.abs(dist) < 2) { done(); return; }
+    // más distancia, más tiempo: entre ~1s y 2s, con easing suave a ambas puntas
+    const dur = Math.min(2000, 900 + Math.abs(dist) * 0.28);
+    const t0 = performance.now();
+    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      window.scrollTo(0, start + dist * ease(p));
+      if (p < 1) animRaf = requestAnimationFrame(step);
+      else done();
+    };
+    animRaf = requestAnimationFrame(step);
+    // si la persona interviene (rueda, tacto, teclado), el viaje se cancela
+    const cancel = () => { cancelAnimationFrame(animRaf); done(); };
+    ["wheel", "touchstart", "keydown"].forEach(ev =>
+      window.addEventListener(ev, cancel, { once: true, passive: true }));
   }
 
   // anclas de la misma página (nav, menú móvil, botones data-goto)
