@@ -138,12 +138,23 @@
 
   /* ---------- Navegación entre secciones: viaje lento y sereno ---------- */
   let animRaf = null;
+  function revealUpTo(limitY) {
+    const margen = Math.max(window.innerHeight, 900);
+    $$(".reveal, .reveal-img, [data-stagger]").forEach(el => {
+      if (el.getBoundingClientRect().top + window.scrollY < limitY + margen) el.classList.add("in");
+    });
+  }
   function animateScrollTo(y, durOverride) {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { window.scrollTo(0, y); return; }
     cancelAnimationFrame(animRaf);
+    // revelar de antemano lo que va a pasar frente a la cámara: sin transiciones
+    // disparándose en pleno viaje, el desplazamiento queda liso
+    document.body.classList.add("nav-scroll");
+    revealUpTo(Math.max(y, window.scrollY));
+    const endNav = () => setTimeout(() => document.body.classList.remove("nav-scroll"), 80);
     const start = window.scrollY;
     const dist = y - start;
-    if (Math.abs(dist) < 2) return;
+    if (Math.abs(dist) < 2) { endNav(); return; }
     // más distancia, más tiempo: entre 0.8s y 1.6s
     const dur = durOverride || Math.min(1600, 800 + Math.abs(dist) * 0.22);
     const t0 = performance.now();
@@ -152,10 +163,11 @@
       const p = Math.min(1, (now - t0) / dur);
       window.scrollTo(0, start + dist * ease(p));
       if (p < 1) animRaf = requestAnimationFrame(step);
+      else endNav();
     };
     animRaf = requestAnimationFrame(step);
     // si la persona interviene (rueda, tacto, teclado), el viaje se cancela
-    const cancel = () => cancelAnimationFrame(animRaf);
+    const cancel = () => { cancelAnimationFrame(animRaf); endNav(); };
     ["wheel", "touchstart", "keydown"].forEach(ev =>
       window.addEventListener(ev, cancel, { once: true, passive: true }));
   }
@@ -203,6 +215,8 @@
       if (e.ctrlKey) return;                                   // zoom del navegador
       if (document.body.style.overflow === "hidden") return;   // lightbox / menú abierto
       if (document.body.classList.contains("menu-open")) return;
+      // trackpad (deltas chicos y continuos): scroll nativo, que ya es fluido
+      if (e.deltaMode === 0 && Math.abs(e.deltaY) < 40) return;
       e.preventDefault();
       const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
       if (!raf) { target = window.scrollY; current = target; }

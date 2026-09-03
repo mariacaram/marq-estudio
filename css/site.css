@@ -767,6 +767,9 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .lb-count { position: absolute; bottom: 1.4rem; left: 50%; translate: -50%; color: #fff; opacity: 0.7; font-size: 0.75rem; letter-spacing: 0.2em; }
 
 /* ---------- Reveals ---------- */
+/* durante la navegación programada entre secciones no se anima nada: fluidez */
+body.nav-scroll .reveal, body.nav-scroll .reveal-img, body.nav-scroll [data-stagger] > * { transition: none !important; }
+
 .reveal { opacity: 0; transform: translateY(34px); transition: opacity 1s var(--ease-out), transform 1s var(--ease-out); }
 .reveal.in { opacity: 1; transform: none; }
 .reveal-img { clip-path: inset(8% 6% 8% 6%); transform: scale(1.05); transition: clip-path 1.2s var(--ease-out), transform 1.4s var(--ease-out); }
