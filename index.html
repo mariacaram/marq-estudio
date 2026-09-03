@@ -32,13 +32,13 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg?v=3" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=15">
+<link rel="stylesheet" href="css/site.css?v=16">
 </head>
 <body>
 
 <main id="app" style="min-height:100svh"></main>
 
-<script src="js/site.js?v=9"></script>
+<script src="js/site.js?v=10"></script>
 <script src="js/gallery.js?v=3"></script>
 <script>
 (async function () {
@@ -293,7 +293,8 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
   const heroImg = document.querySelector(".hero-media img");
   if (heroImg && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     addEventListener("scroll", () => {
-      const y = Math.min(window.scrollY, window.innerHeight);
+      const y = window.scrollY;
+      if (y > window.innerHeight) return; // el hero ya no está en cámara
       heroImg.style.translate = "0 " + y * 0.18 + "px";
     }, { passive: true });
   }

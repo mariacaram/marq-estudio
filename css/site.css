@@ -180,9 +180,7 @@ button { font-family: inherit; }
 .nav.on-hero { color: #fff; }
 .nav.solid {
   color: var(--ink);
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
   box-shadow: 0 1px 0 var(--line);
   padding-block: 0.8rem;
 }
