@@ -104,6 +104,7 @@ button { font-family: inherit; }
   text-wrap: balance;
 }
 .h-section {
+  margin-inline-start: -0.045em;
   font-weight: 200;
   font-size: clamp(2rem, 4.6vw, 3.6rem);
   line-height: 1.1;
@@ -180,15 +181,15 @@ button { font-family: inherit; }
 .nav.on-hero { color: #fff; }
 .nav.solid {
   color: var(--ink);
-  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  background: var(--bg);
   box-shadow: 0 1px 0 var(--line);
   padding-block: 0.8rem;
 }
 .nav-side { display: flex; align-items: center; gap: clamp(0.9rem, 2vw, 1.6rem); }
 .nav-brand { z-index: 2; display: block; position: relative; }
 .nav-brand::before {
-  content: ""; position: absolute; right: calc(100% + 0.7rem); top: 50%; translate: 0 -50%;
-  width: clamp(5rem, 10vw, 12rem); height: 1px;
+  content: ""; position: absolute; right: calc(100% + 0.7rem); top: 78%; translate: 0 -50%;
+  width: clamp(5rem, 10vw, 12rem); height: 2.5px; border-radius: 2px;
   background: var(--irid-line);
 }
 .nav-brand img { height: clamp(1.4rem, 2.4vw, 1.7rem); width: auto; display: block; }
@@ -272,7 +273,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .hero-inner { position: relative; z-index: 2; text-align: center; padding: 0 var(--gutter); translate: 0 -5svh; }
 .hero .hero-mark { height: clamp(2.3rem, 6svh, 3.2rem); width: auto; display: block; margin: 0 auto clamp(1.8rem, 6svh, 3.4rem); filter: drop-shadow(0 2px 14px rgba(0,0,0,0.35)); }
 .hero-line {
-  display: block; width: clamp(7rem, 12vw, 11rem); height: 1px;
+  display: block; width: clamp(7rem, 12vw, 11rem); height: 2.5px; border-radius: 2px;
   background: var(--irid-line); margin: 0 auto clamp(2.4rem, 8svh, 4.4rem);
 }
 .hero .display {
@@ -389,7 +390,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: end;
-  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: clamp(3.4rem, 8vw, 6rem);
 }
 .about-banner {
   position: relative; margin: 0;
@@ -408,8 +409,8 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   margin: 0; padding: 0 var(--gutter) clamp(3rem, 7vw, 5.5rem);
   color: #fff; text-align: center;
   font-weight: 200;
-  font-size: clamp(1.35rem, 3.2vw, 2.5rem);
-  line-height: 1.28;
+  font-size: clamp(1.1rem, 2.3vw, 1.85rem);
+  line-height: 1.35;
   text-wrap: balance;
   text-shadow: 0 2px 26px rgba(0,0,0,0.45);
 }
@@ -652,14 +653,14 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .footer-inner {
   width: min(var(--max), 100%);
   margin-inline: auto;
-  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 2rem;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.4rem 2.5rem;
 }
 .footer .wordmark { font-size: 1.3rem; }
 .footer nav { display: flex; flex-wrap: wrap; gap: 1.4rem; }
 .footer-brand { display: flex; align-items: center; gap: 0.9rem; position: relative; width: fit-content; }
 .footer-brand::before {
-  content: ""; position: absolute; right: calc(100% + 0.9rem); top: 50%; translate: 0 -50%;
-  width: clamp(5rem, 10vw, 12rem); height: 1px;
+  content: ""; position: absolute; right: calc(100% + 0.9rem); top: 76%; translate: 0 -50%;
+  width: clamp(5rem, 10vw, 12rem); height: 2.5px; border-radius: 2px;
   background: var(--irid-line);
 }
 .footer-logo { height: clamp(1.3rem, 2.4vw, 1.6rem); width: auto; display: block; }
@@ -684,20 +685,16 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
 .float-btn svg { width: 1.5rem; height: 1.5rem; }
 .float-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 36px -8px rgba(28,27,25,0.5); }
 
-/* ---------- Página de proyecto ---------- */
-.proj-band {
-  margin-top: 4.6rem;
-  background: var(--band); color: var(--band-ink);
-  padding: clamp(1.4rem, 3vw, 2rem) var(--edge);
-  display: flex; align-items: center; justify-content: space-between; gap: 1.4rem;
+
+.proj-head { margin-block: 6.6rem 1.8rem; }
+.proj-head .kicker { margin-bottom: 0.7rem; }
+.proj-title {
+  margin: 0;
+  font-weight: 200;
+  font-size: clamp(1.7rem, 3.4vw, 2.7rem);
+  letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.12;
+  text-wrap: balance;
 }
-.proj-band .band-mark { height: clamp(1.7rem, 3.4vw, 2.3rem); width: auto; }
-.proj-band h1 {
-  margin: 0; font-size: clamp(0.95rem, 2.4vw, 1.4rem);
-  font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
-  text-align: right;
-}
-.proj-band h1 strong { font-weight: 700; }
 .proj-cover { position: relative; overflow: clip; }
 .proj-cover img { width: 100%; height: min(78svh, 760px); object-fit: cover; }
 .proj-intro {

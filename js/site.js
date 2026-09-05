@@ -94,12 +94,9 @@
     foot.className = "footer";
     foot.innerHTML = `
       <div class="footer-inner">
-        <div>
-          <div class="footer-brand">
-            <img class="footer-logo" src="${base}assets/brand/logo-marq-blanco.svg" alt="Marq. Estudio">
-            <span class="footer-tag">Arquitectura<br>&amp; Diseño</span>
-          </div>
-          <p class="fine" style="margin:1rem 0 0">${escapeHtml(aj.ubicacion)}</p>
+        <div class="footer-brand">
+          <img class="footer-logo" src="${base}assets/brand/logo-marq-blanco.svg" alt="Marq. Estudio">
+          <span class="footer-tag">Arquitectura<br>&amp; Diseño</span>
         </div>
         <nav aria-label="Redes">
           <a href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener">Instagram</a>
@@ -107,7 +104,7 @@
           ${aj.ecommerce ? `<a href="${escapeHtml(aj.ecommerce)}" target="_blank" rel="noopener">Tienda</a>` : ""}
           <a href="mailto:${escapeHtml(aj.email)}">Email</a>
         </nav>
-        <p class="fine">© ${new Date().getFullYear()} Marq. Estudio — Arquitectura &amp; Diseño</p>
+        <p class="fine">© ${new Date().getFullYear()} Marq. Estudio · ${escapeHtml(aj.ubicacion)}</p>
       </div>`;
     document.body.appendChild(foot);
   }
