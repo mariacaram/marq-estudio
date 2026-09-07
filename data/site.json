@@ -24,7 +24,7 @@
     ]
   },
   "inicio": {
-    "eslogan": "Espacios que inspiran y emocionan.",
+    "eslogan": "El diálogo exacto entre arquitectura e interiorismo.",
     "sub": "Interiorismo & Arquitectura",
     "imagen": "Proyectos/casa-san-pablo/01.jpg"
   },
@@ -53,43 +53,43 @@
   },
   "servicios": {
     "titulo": "Nuestros\nservicios.",
-    "intro": "Dos programas pensados para transformar tus espacios estés donde estés, con un profesional acompañándote en cada decisión.",
+    "intro": "Dos modalidades proyectuales estructuradas para transformar tu forma de habitar desde cualquier lugar, con nuestra dirección técnica y estética acompañando cada decisión.",
     "items": [
       {
         "id": "refresh",
-        "nombre": "Refresh",
+        "nombre": "Re-Styling",
         "desdeUSD": 400,
-        "bajada": "Ideal para quienes necesitan una guía paso a paso para darle vida a sus espacios, a su tiempo y sin obra.",
+        "bajada": "Una hoja de ruta precisa para renovar la atmósfera de tus espacios mediante interiorismo, sin necesidad de obra.",
         "para": [
-          "Querés hacer un cambio pero no sabés por dónde empezar",
-          "Querés renovar tus espacios sin hacer obra",
-          "Alquilás y dudás si vale la pena — spoiler: lo vale"
+          "Buscás potenciar un espacio y necesitás un criterio estético profesional para dar el primer paso.",
+          "Querés renovar la atmósfera de un ambiente enfocándote puramente en el diseño interior y el equipamiento.",
+          "Habitás una propiedad alquilada y buscás personalizarla mediante intervenciones inteligentes y reversibles."
         ],
         "entregables": [
-          "Look & feel: imágenes de referencia para cada sector",
-          "Collage y moodboard para definir paleta de colores",
-          "Planilla de objetos, proveedores y listado de prioridades",
-          "Planos de muebles a medida, de ser necesarios"
+          "Moodboard de texturas y definición de paleta cromática.",
+          "Referencias visuales por ambiente.",
+          "Hoja de ruta de compras, especificando objetos, prioridades y proveedores recomendados.",
+          "Documentación técnica de mobiliario a medida, en caso de ser necesario."
         ]
       },
       {
         "id": "extreme-makeover",
-        "nombre": "Extreme Makeover",
+        "nombre": "Proyecto integral",
         "desdeUSD": 1500,
-        "bajada": "Nuestro programa más completo: un servicio integral de diseño que abarca todos los detalles — planos, estética, 3D y renders.",
+        "bajada": "Un proyecto de interiorismo integral. Planificamos la distribución, la materialidad y el diseño de cada detalle para que puedas visualizar y ejecutar el cambio por completo.",
         "para": [
-          "Compraste una propiedad y querés sacarle el mayor provecho antes de mudarte",
-          "Necesitás un anteproyecto para después ejecutar la obra por tu cuenta",
-          "Querés un cambio profundo y poder visualizarlo con renders"
+          "Necesitás un máster plan de diseño para optimizar cada metro cuadrado de tu casa antes de habitarla.",
+          "Buscás un legajo técnico (anteproyecto) para poder gestionar y dirigir los trabajos por tu cuenta.",
+          "Querés una transformación profunda y necesitás previsualizar el resultado final del espacio mediante renders."
         ],
         "entregables": [
-          "Look & feel: imágenes de referencia para cada sector",
-          "Modelado 3D interactivo de todos los espacios, con interiorismo",
-          "Planos de distribución: antes y después",
-          "Renders realistas de los ambientes principales",
-          "Planilla personalizada de materiales para tu obra",
-          "Planos de vistas para muebles a medida",
-          "Planilla base de objetos y proveedores"
+          "Referencias visuales por sector.",
+          "Modelado 3D espacial interactivo con propuesta de interiorismo.",
+          "Planimetría arquitectónica: layout de estado actual y propuesta de nueva distribución.",
+          "Renders fotorrealistas de los espacios protagonistas.",
+          "Especificación detallada de revestimientos y materiales para la obra.",
+          "Planos de detalle y vistas para la ejecución de carpintería a medida.",
+          "Planilla general de equipamiento, objetos y red de proveedores."
         ]
       }
     ]
@@ -371,8 +371,8 @@
     "titulo": "Hagamos un\ngran cambio.",
     "intro": "Nos encanta conocer nuevas ideas y espacios por transformar. Contanos qué tenés en mente y te respondemos por WhatsApp.",
     "necesidades": [
-      "Refresh",
-      "Extreme Makeover",
+      "Re-styling",
+      "Proyecto Integral",
       "Obra / proyecto integral",
       "Asesoría puntual"
     ]
