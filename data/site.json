@@ -40,13 +40,13 @@
       {
         "nombre": "Rosario",
         "rol": "Diseñadora de interiores · Cofundadora",
-        "bio": "Completá una breve bio desde el panel de administración.",
+        "bio": "",
         "foto": "assets/equipo/rosario.jpg"
       },
       {
         "nombre": "Emilia",
         "rol": "Arquitecta · Cofundadora",
-        "bio": "Completá una breve bio desde el panel de administración.",
+        "bio": "",
         "foto": "assets/equipo/emilia.jpg"
       }
     ]
