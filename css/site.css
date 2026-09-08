@@ -305,7 +305,7 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   opacity: 0.9;
 }
 .hero-scroll {
-  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  position: absolute; bottom: 2rem; left: 50%; translate: -50% 0;
   z-index: 2; display: grid; justify-items: center; gap: 0.6rem;
   font-size: 0.62rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
   color: #fff; opacity: 0.85; background: none; border: 0; cursor: pointer;
