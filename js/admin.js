@@ -426,7 +426,7 @@
           <div>
             <label class="f">Precio mínimo de proyectos (USD)</label>
             <input type="number" id="a-min" value="${esc(aj.precioMinimoUSD)}">
-            <p class="help" style="margin-top:0.5rem">Aparece como “Nuestros proyectos integrales parten de USD …” en el formulario de contacto.</p>
+            <p class="help" style="margin-top:0.5rem">Aparece como “Nuestros programas parten de USD …” en el formulario de contacto. Debería coincidir con el precio del programa más económico.</p>
           </div>
           <div>
             <h3 style="margin-top:0.9rem">Rangos del filtro de presupuesto</h3>

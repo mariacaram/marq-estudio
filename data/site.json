@@ -15,12 +15,12 @@
     "email": "marq.estudio2@gmail.com",
     "ecommerce": "",
     "ubicacion": "Yerba Buena, Tucumán · Argentina",
-    "precioMinimoUSD": 1500,
+    "precioMinimoUSD": 400,
     "rangosPresupuesto": [
-      "1.5k – 3k",
-      "3k – 6k",
-      "6k – 12k",
-      "+12k"
+      "400 – 800",
+      "800 – 1.500",
+      "1.500 – 3.000",
+      "+3.000"
     ]
   },
   "inicio": {
