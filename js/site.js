@@ -43,8 +43,8 @@
       <a class="nav-brand" href="${base}index.html#inicio"><img src="${base}assets/brand/m-celeste.svg" alt="Marq. Estudio"></a>
       <div class="nav-side nav-right">
         <nav aria-label="Principal"><ul class="nav-links">
-          <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
           <li><a href="${base}index.html#proyectos">Proyectos</a></li>
+          <li><a href="${base}index.html#estudio">Quiénes somos</a></li>
           <li><a href="${base}index.html#servicios">Servicios</a></li>
           <li><a href="${base}index.html#contacto">Contacto</a></li>
         </ul></nav>
@@ -56,7 +56,7 @@
     const menu = document.createElement("div");
     menu.className = "mobile-menu";
     menu.innerHTML = `
-      ${["Inicio|#inicio", "Quiénes somos|#estudio", "Proyectos|#proyectos", "Servicios|#servicios", "Contacto|#contacto"]
+      ${["Inicio|#inicio", "Proyectos|#proyectos", "Quiénes somos|#estudio", "Servicios|#servicios", "Contacto|#contacto"]
         .map((it, i) => { const [t, h] = it.split("|"); return `<a class="menu-item" style="transition-delay:${80 + i * 60}ms" href="${base}index.html${h}">${t}</a>`; }).join("")}
       ${aj.ecommerce ? `<a class="menu-item" style="transition-delay:380ms" href="${escapeHtml(aj.ecommerce)}" target="_blank" rel="noopener">Tienda</a>` : ""}
       <div class="menu-foot">
