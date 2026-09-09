@@ -32,7 +32,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg?v=6" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=21">
+<link rel="stylesheet" href="css/site.css?v=22">
 </head>
 <body>
 
@@ -147,13 +147,18 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
                     <div>
                       <p class="bajada">${escapeHtml(s.bajada)}</p>
                       <ul class="para">${(s.para || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
-                      <div class="cta-row"><button class="btn" data-goto="#contacto" data-servicio="${escapeHtml(s.nombre)}">Quiero este programa</button></div>
                     </div>
                     <div class="entregables">
                       <h4>Qué incluye</h4>
                       <ul>${(s.entregables || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
                     </div>
                   </div>
+                  ${(s.necesitamos || []).length ? `
+                  <div class="necesitamos">
+                    <h4>Qué necesitamos de vos</h4>
+                    <ul>${s.necesitamos.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+                  </div>` : ""}
+                  <div class="cta-row"><button class="btn" data-goto="#contacto" data-servicio="${escapeHtml(s.nombre)}">Quiero este programa</button></div>
                 </div>
               </div>
             </article>`).join("")}

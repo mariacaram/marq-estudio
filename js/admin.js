@@ -352,11 +352,14 @@
           <div data-list="para" data-i="${i}"></div>
           <h3>Qué incluye (entregables)</h3>
           <div data-list="entregables" data-i="${i}"></div>
+          <h3>Qué necesitamos de vos</h3>
+          <div data-list="necesitamos" data-i="${i}"></div>
           <div style="margin-top:1rem"><button type="button" class="btn danger small" data-del="${i}">Eliminar este programa</button></div>
         </div>`).join("") +
         `<button type="button" class="btn ghost" data-add>+ Agregar programa</button>`;
       $$("[data-list]", sw).forEach(el => {
         const s = data.servicios.items[Number(el.dataset.i)];
+        if (!Array.isArray(s[el.dataset.list])) s[el.dataset.list] = [];
         listEditor(el, s[el.dataset.list], "");
       });
     };
@@ -375,7 +378,7 @@
         data.servicios.items.splice(Number(del.dataset.del), 1); paint(); markDirty();
       }
       if (e.target.closest("[data-add]")) {
-        data.servicios.items.push({ id: "nuevo-" + Date.now(), nombre: "Nuevo programa", desdeUSD: 0, bajada: "", para: [], entregables: [] });
+        data.servicios.items.push({ id: "nuevo-" + Date.now(), nombre: "Nuevo programa", desdeUSD: 0, bajada: "", para: [], entregables: [], necesitamos: [] });
         paint(); markDirty();
       }
     });

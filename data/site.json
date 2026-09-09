@@ -70,6 +70,12 @@
           "Referencias visuales por ambiente.",
           "Hoja de ruta de compras, especificando objetos, prioridades y proveedores recomendados.",
           "Documentación técnica de mobiliario a medida, en caso de ser necesario."
+        ],
+        "necesitamos": [
+          "Planos o croquis de la propiedad con medidas básicas.",
+          "Fotografías y videos actuales de cada sector a intervenir.",
+          "Medidas y fotos de los muebles existentes que quieras conservar e integrar.",
+          "Tus referencias o imágenes que muestren lo que te gusta."
         ]
       },
       {
@@ -90,6 +96,12 @@
           "Especificación detallada de revestimientos y materiales para la obra.",
           "Planos de detalle y vistas para la ejecución de carpintería a medida.",
           "Planilla general de equipamiento, objetos y red de proveedores."
+        ],
+        "necesitamos": [
+          "Plano oficial o croquis acotado de la planta actual.",
+          "Registro fotográfico completo y video del recorrido por el lugar.",
+          "Medidas y fotos de los muebles actuales que desees reutilizar en el proyecto.",
+          "Tus referencias visuales y una idea clara de tus necesidades de uso."
         ]
       }
     ]

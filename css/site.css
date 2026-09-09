@@ -512,7 +512,37 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   counter-increment: entregable;
   font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; color: var(--taupe);
 }
-.cta-row { margin-top: 1.6rem; }
+.cta-row { margin-top: 1.8rem; padding-bottom: clamp(2rem, 4.5vw, 3rem); }
+
+/* Lo que el cliente aporta: checklist para preparar antes de escribir */
+.necesitamos {
+  margin-top: 0.4rem;
+  padding: clamp(1.3rem, 2.6vw, 1.9rem) clamp(1.3rem, 2.8vw, 2.2rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+}
+.svc-item.open .necesitamos { opacity: 1; transform: none; transition-delay: 0.2s; }
+.necesitamos h4 {
+  margin: 0 0 1rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--taupe);
+}
+.necesitamos ul {
+  margin: 0; padding: 0; list-style: none;
+  display: grid; gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+}
+.necesitamos li {
+  position: relative; padding-left: 2rem;
+  font-size: 0.95rem; color: var(--ink-soft);
+}
+.necesitamos li::before {
+  content: ""; position: absolute; left: 0; top: 0.35em;
+  width: 0.85rem; height: 0.85rem;
+  border: 1px solid var(--taupe); border-radius: 2px;
+}
 
 .btn {
   display: inline-flex; align-items: center; gap: 0.7rem;
