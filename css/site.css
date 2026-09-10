@@ -650,9 +650,9 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   transition: opacity 0.3s;
 }
 .follow .handle::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  content: ""; position: absolute; left: -0.4rem; right: -0.4rem; bottom: 0;
   height: var(--irid-w); border-radius: 2px;
-  background: var(--irid);
+  background: var(--irid-line);
 }
 .follow .handle:hover { opacity: 0.65; }
 /* Marquesina infinita de fotos (estilo REN) */
@@ -717,17 +717,20 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   display: grid; gap: 0.7rem;
 }
 .float-btn {
+  position: relative;
   width: 3.4rem; height: 3.4rem; border-radius: 50%;
   display: grid; place-items: center;
-  color: var(--bg);
-  border: var(--irid-w) solid transparent;
-  background:
-    linear-gradient(var(--ink), var(--ink)) padding-box,
-    linear-gradient(135deg, #BFD9EE 0%, #CCC2E6 30%, #C2DACB 62%, #EFE6C4 100%) border-box;
+  background: var(--ink); color: var(--bg);
   box-shadow: 0 10px 30px -8px rgba(28,27,25,0.45);
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
 }
 .float-btn svg { width: 1.5rem; height: 1.5rem; }
+/* La medialuna vive por fuera del círculo, sin tapar el ícono ni el click */
+.float-btn .btn-arc {
+  position: absolute; inset: -0.5rem;
+  width: calc(100% + 1rem); height: calc(100% + 1rem);
+  pointer-events: none; overflow: visible;
+}
 .float-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 36px -8px rgba(28,27,25,0.5); }
 
 

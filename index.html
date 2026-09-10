@@ -32,13 +32,13 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg?v=6" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=27">
+<link rel="stylesheet" href="css/site.css?v=28">
 </head>
 <body>
 
 <main id="app" style="min-height:100svh"></main>
 
-<script src="js/site.js?v=14"></script>
+<script src="js/site.js?v=15"></script>
 <script src="js/gallery.js?v=3"></script>
 <script>
 (async function () {
@@ -62,9 +62,13 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
   /* ---------- Secciones ---------- */
   const heroLines = String(data.inicio.eslogan || "").split("\n").map((l, i) =>
     `<span class="hl"><span style="--d:${(0.85 + i * 0.28).toFixed(2)}s">${escapeHtml(l)}</span></span>`).join("");
+  const portadas = (Array.isArray(data.inicio.imagenes) ? data.inicio.imagenes : []).filter(Boolean);
+  const portadaImg = portadas.length
+    ? portadas[Math.floor(Math.random() * portadas.length)]
+    : data.inicio.imagen;
   const heroHtml = `
     <section class="hero" id="inicio">
-      <div class="hero-media"><img src="${escapeHtml(data.inicio.imagen)}" alt="" fetchpriority="high"></div>
+      <div class="hero-media"><img src="${escapeHtml(portadaImg)}" alt="" fetchpriority="high"></div>
       <div class="hero-inner">
         <img class="hero-mark" src="assets/brand/m-celeste.svg" alt="Marq.">
         <span class="hero-line" aria-hidden="true"></span>
@@ -167,10 +171,13 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     </section>`;
 
   // Instagram: marquesina infinita con fotos de las obras (estilo REN)
-  const igFotos = ["01","02","03","04","05","06","07","08","09","10","11","12"].map(n => `assets/instagram/ig-${n}.jpg`);
-  const igTrack = igFotos.map(src =>
+  const igFotos = (data.instagram && Array.isArray(data.instagram.fotos) ? data.instagram.fotos : []).filter(Boolean);
+  // La tira se duplica para el loop: si hay pocas fotos, se repiten hasta llenar el ancho.
+  let igLoop = igFotos.slice();
+  while (igLoop.length && igLoop.length < 8) igLoop = igLoop.concat(igFotos);
+  const igTrack = igLoop.map(src =>
     `<a href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Abrir Instagram" tabindex="-1"><img src="${escapeHtml(src)}" alt="" loading="lazy"></a>`).join("");
-  const followHtml = `
+  const followHtml = !igFotos.length ? "" : `
     <section class="section follow">
       <div class="wrap">
         <p class="kicker reveal">Seguinos</p>

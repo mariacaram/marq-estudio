@@ -37,7 +37,7 @@ Cuando el token venza (al año), se genera otro igual y se actualiza `GITHUB_TOK
 | Pestaña | Qué controla |
 |---|---|
 | **Proyectos** | Crear proyectos, subir fotos (se achican solas), reordenarlas arrastrando, elegir tamaño de cada foto (Automática / Grande / Ancho completo), marcar la portada ★, editar el comentario de portada. |
-| **Inicio** | El eslogan, la frase chica y la foto de fondo de la portada. |
+| **Inicio** | El eslogan, la frase chica, las **fotos de portada** (se muestra una al azar en cada visita: subí las que quieras, con 5 a 7 anda muy bien) y la **tira de fotos de Instagram** de la sección “Seguinos”. |
 | **Estudio** | El texto de "quiénes somos", la cita, y los integrantes con su bio y foto. |
 | **Servicios** | Los programas (Refresh, Extreme Makeover…), su precio "desde", para quién es y qué incluye. |
 | **Contacto** | El título, la intro y las opciones de "Mi proyecto necesita…". |

@@ -26,7 +26,10 @@
   "inicio": {
     "eslogan": "Un diálogo honesto entre el espacio y su materialidad.",
     "sub": "Interiorismo & Arquitectura",
-    "imagen": "Proyectos/casa-san-pablo/01.jpg"
+    "imagen": "Proyectos/casa-san-pablo/01.jpg",
+    "imagenes": [
+      "Proyectos/casa-san-pablo/01.jpg"
+    ]
   },
   "estudio": {
     "titulo": "Diseño con propósito\ny carácter propio.",
@@ -387,6 +390,22 @@
       "Proyecto Integral",
       "Obra / proyecto integral",
       "Asesoría puntual"
+    ]
+  },
+  "instagram": {
+    "fotos": [
+      "assets/instagram/ig-01.jpg",
+      "assets/instagram/ig-02.jpg",
+      "assets/instagram/ig-03.jpg",
+      "assets/instagram/ig-04.jpg",
+      "assets/instagram/ig-05.jpg",
+      "assets/instagram/ig-06.jpg",
+      "assets/instagram/ig-07.jpg",
+      "assets/instagram/ig-08.jpg",
+      "assets/instagram/ig-09.jpg",
+      "assets/instagram/ig-10.jpg",
+      "assets/instagram/ig-11.jpg",
+      "assets/instagram/ig-12.jpg"
     ]
   }
 }

@@ -29,6 +29,28 @@
     bag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg>'
   };
 
+  /* Medialuna de degradé (como la del logo): arranca arriba a la izquierda,
+     baja por el costado y termina abajo a la derecha, difuminada en las dos puntas. */
+  const ARCO = '<svg class="btn-arc" viewBox="0 0 100 100" aria-hidden="true" focusable="false">' +
+    '<path d="M9.8 27.7 A46 46 0 0 0 62.7 94.2" fill="none" stroke="url(#marq-arco)" stroke-width="4.5" stroke-linecap="round"/></svg>';
+
+  function defsArco() {
+    if (document.getElementById("marq-arco")) return;
+    const d = document.createElement("div");
+    d.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+    d.innerHTML = '<svg aria-hidden="true"><defs>' +
+      '<linearGradient id="marq-arco" gradientUnits="userSpaceOnUse" x1="10" y1="28" x2="63" y2="94">' +
+      '<stop offset="0" stop-color="#BFD9EE" stop-opacity="0"/>' +
+      '<stop offset="0.12" stop-color="#BFD9EE"/>' +
+      '<stop offset="0.44" stop-color="#CCC2E6"/>' +
+      '<stop offset="0.7" stop-color="#C2DACB"/>' +
+      '<stop offset="0.9" stop-color="#EFE6C4"/>' +
+      '<stop offset="0.95" stop-color="#EFE6C4"/>' +
+      '<stop offset="1" stop-color="#EFE6C4" stop-opacity="0"/>' +
+      '</linearGradient></defs></svg>';
+    document.body.appendChild(d);
+  }
+
   /* ---------- Render compartido: nav, footer, flotante ---------- */
   function renderChrome(data, opts) {
     const aj = data.ajustes;
@@ -84,9 +106,10 @@
     // Botones flotantes: Instagram + WhatsApp, mismo estilo
     const fg = document.createElement("div");
     fg.className = "float-group";
+    defsArco();
     fg.innerHTML = `
-      <a class="float-btn" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Seguinos en Instagram">${ICONS.ig}</a>
-      ${wa0 ? `<a class="float-btn" href="${waLink(wa0.numero)}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">${ICONS.wa}</a>` : ""}`;
+      <a class="float-btn" href="${escapeHtml(aj.instagram)}" target="_blank" rel="noopener" aria-label="Seguinos en Instagram">${ICONS.ig}${ARCO}</a>
+      ${wa0 ? `<a class="float-btn" href="${waLink(wa0.numero)}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">${ICONS.wa}${ARCO}</a>` : ""}`;
     document.body.appendChild(fg);
 
     // Footer

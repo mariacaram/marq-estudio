@@ -125,14 +125,14 @@
   }
 
   /* ===== Imágenes: redimensionar en el navegador ===== */
-  function fileToResizedJpeg(file) {
+  function fileToResizedJpeg(file, maxLado) {
     return new Promise((resolve, reject) => {
       const img = new Image();
       const url = URL.createObjectURL(file);
       img.onload = () => {
         URL.revokeObjectURL(url);
         let { width: w, height: h } = img;
-        const scale = Math.min(1, MAX_IMG / Math.max(w, h));
+        const scale = Math.min(1, (maxLado || MAX_IMG) / Math.max(w, h));
         w = Math.round(w * scale); h = Math.round(h * scale);
         const canvas = document.createElement("canvas");
         canvas.width = w; canvas.height = h;
@@ -241,8 +241,106 @@
     container.appendChild(wrap);
   }
 
+  /* ---- Galerías de fotos sueltas (portada, Instagram) ----
+     `arr` es una lista de rutas; se puede reordenar, quitar y subir. */
+  async function siguienteNombre(dir, prefix) {
+    const list = await gh(dir);
+    const re = new RegExp("^" + prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(\\d+)\\.jpg$", "i");
+    let max = 0;
+    (Array.isArray(list) ? list : []).forEach(f => {
+      const m = re.exec(String(f.name));
+      if (m) max = Math.max(max, parseInt(m[1], 10));
+    });
+    return prefix + String(max + 1).padStart(2, "0") + ".jpg";
+  }
+
+  function galeriaFotos(container, arr, opts) {
+    const dir = opts.dir, prefix = opts.prefix || "";
+    const grid = document.createElement("div");
+    grid.className = "fotogrid";
+    const drop = document.createElement("label");
+    drop.className = "dropfile";
+    drop.innerHTML = `<strong>Subir fotos</strong> — tocá acá o arrastrá los archivos<br>
+      <span style="font-size:0.8rem">Se achican solas antes de subir; podés seleccionar varias.</span>
+      <input type="file" accept="image/*" multiple>`;
+    const fileIn = drop.querySelector("input");
+    container.appendChild(grid);
+    container.appendChild(drop);
+
+    const cambio = () => { if (opts.onChange) opts.onChange(); markDirty(); };
+    const paint = () => {
+      grid.innerHTML = arr.length ? arr.map((src, i) => `
+        <div class="foto" draggable="true" data-i="${i}">
+          <span class="n">${i + 1}</span>
+          <img src="../${esc(src)}" alt="" loading="lazy">
+          <div class="rowbtns">
+            <button type="button" class="del" data-del="${i}" title="Quitar de la página">✕</button>
+          </div>
+        </div>`).join("") : `<p class="help" style="margin:0">Todavía no hay fotos: subí las primeras acá abajo.</p>`;
+      if (opts.onPaint) opts.onPaint(arr.length);
+    };
+    paint();
+
+    grid.addEventListener("click", e => {
+      const i = e.target.dataset.del;
+      if (i !== undefined && confirm("¿Quitar esta foto de la página?")) {
+        arr.splice(Number(i), 1); paint(); cambio();
+      }
+    });
+
+    let dragI = null;
+    grid.addEventListener("dragstart", e => {
+      const el = e.target.closest(".foto");
+      if (!el) return;
+      dragI = Number(el.dataset.i); el.classList.add("dragging");
+    });
+    grid.addEventListener("dragend", () => $$(".foto", grid).forEach(x => x.classList.remove("dragging", "dropzone")));
+    grid.addEventListener("dragover", e => {
+      e.preventDefault();
+      const el = e.target.closest(".foto");
+      $$(".foto", grid).forEach(x => x.classList.remove("dropzone"));
+      if (el) el.classList.add("dropzone");
+    });
+    grid.addEventListener("drop", e => {
+      e.preventDefault();
+      const el = e.target.closest(".foto");
+      if (!el || dragI === null) return;
+      const [m] = arr.splice(dragI, 1);
+      arr.splice(Number(el.dataset.i), 0, m);
+      dragI = null; paint(); cambio();
+    });
+
+    const subir = async files => {
+      const imgs = Array.from(files).filter(f => /image\//.test(f.type));
+      if (!imgs.length) return;
+      overlay(true, `Subiendo 1 de ${imgs.length}…`);
+      try {
+        for (let i = 0; i < imgs.length; i++) {
+          overlay(true, `Subiendo ${i + 1} de ${imgs.length}…`);
+          const b64 = await fileToResizedJpeg(imgs[i], opts.maxLado);
+          const name = await siguienteNombre(dir, prefix);
+          await ghPut(`${dir}/${name}`, b64, `Foto ${name} — ${opts.titulo || dir}`);
+          arr.push(`${dir}/${name}`);
+        }
+        paint(); cambio();
+        toast(`${imgs.length} foto${imgs.length > 1 ? "s" : ""} subida${imgs.length > 1 ? "s" : ""}. Tocá “Publicar cambios” para que aparezcan en la página.`);
+      } catch (e2) {
+        toast("Error subiendo fotos: " + e2.message, true);
+      } finally { overlay(false); }
+    };
+    fileIn.addEventListener("change", () => { subir(fileIn.files); fileIn.value = ""; });
+    ["dragover", "dragenter"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+    ["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
+    drop.addEventListener("drop", e => subir(e.dataTransfer.files));
+  }
+
   /* ---- Inicio ---- */
   function renderInicio(c) {
+    if (!Array.isArray(data.inicio.imagenes) || !data.inicio.imagenes.length) {
+      data.inicio.imagenes = data.inicio.imagen ? [data.inicio.imagen] : [];
+    }
+    if (!data.instagram || !Array.isArray(data.instagram.fotos)) data.instagram = { fotos: [] };
+
     c.innerHTML = `
       <div class="card">
         <h2>Portada del sitio</h2>
@@ -250,15 +348,41 @@
         <label class="f">Eslogan (usá Enter para cortar la línea)</label>
         <textarea rows="2" id="i-eslogan">${esc(data.inicio.eslogan)}</textarea>
         ${field("Frase chica (debajo del eslogan)", data.inicio.sub, { k: "sub" })}
-        <h3>Foto de fondo</h3>
-        <p class="help">Ruta de una foto ya subida, por ejemplo <code>Proyectos/casa-san-pablo/01.jpg</code>. Elegí una foto horizontal y luminosa.</p>
-        <input type="text" id="i-imagen" value="${esc(data.inicio.imagen)}">
-        <div style="margin-top:0.8rem"><img id="i-prev" src="../${esc(data.inicio.imagen)}" alt="" style="max-width:340px;border:1px solid var(--line)"></div>
+      </div>
+      <div class="card">
+        <h2>Fotos de portada (<span id="i-n">${data.inicio.imagenes.length}</span>)</h2>
+        <p class="help">
+          Cada vez que alguien entra a la página se muestra <strong>una de estas fotos, elegida al azar</strong>.
+          Cargá las que quieras: con 5 a 7 anda muy bien.<br>
+          Elegí fotos horizontales, luminosas y con espacio libre en el centro, que ahí van el logo y el eslogan.
+          Arrastralas para ordenarlas.
+        </p>
+        <div id="i-portadas"></div>
+      </div>
+      <div class="card">
+        <h2>Tira de fotos de Instagram (<span id="ig-n">${data.instagram.fotos.length}</span>)</h2>
+        <p class="help">
+          Es la fila de fotos que se desliza sola en la sección “Seguinos en Instagram”.
+          No se conecta con Instagram: elegís acá cuáles mostrar y las cambiás cuando quieras.
+          Si la dejás vacía, esa sección no aparece en la página.
+        </p>
+        <div id="i-ig"></div>
       </div>`;
-    const eslogan = $("#i-eslogan"); bind(eslogan, data.inicio, "eslogan");
-    const sub = c.querySelector('[data-k="sub"]'); bind(sub, data.inicio, "sub");
-    const im = $("#i-imagen");
-    im.addEventListener("input", () => { data.inicio.imagen = im.value; $("#i-prev").src = "../" + im.value; markDirty(); });
+
+    bind($("#i-eslogan"), data.inicio, "eslogan");
+    bind(c.querySelector('[data-k="sub"]'), data.inicio, "sub");
+
+    galeriaFotos($("#i-portadas"), data.inicio.imagenes, {
+      dir: "assets/portada", prefix: "", titulo: "Portada", maxLado: 2400,
+      onPaint: n => { $("#i-n").textContent = n; },
+      // `imagen` queda como respaldo para navegadores que abran una versión vieja de la página
+      onChange: () => { data.inicio.imagen = data.inicio.imagenes[0] || data.inicio.imagen; }
+    });
+
+    galeriaFotos($("#i-ig"), data.instagram.fotos, {
+      dir: "assets/instagram", prefix: "ig-", titulo: "Instagram",
+      onPaint: n => { $("#ig-n").textContent = n; }
+    });
   }
 
   /* ---- Estudio ---- */
