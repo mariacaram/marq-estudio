@@ -252,9 +252,13 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     const target = document.querySelector(go.dataset.goto);
     if (target) animateScrollTo(target.getBoundingClientRect().top + window.scrollY);
     if (go.dataset.servicio) {
-      document.querySelectorAll("#chips-necesidad .chip").forEach(c => {
-        if (c.dataset.v === go.dataset.servicio) { c.classList.add("sel"); }
-      });
+      // Comparación tolerante: "Re-Styling" y "Re-styling" son el mismo programa
+      const norm = t => String(t || "").toLowerCase().normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "");
+      const buscado = norm(go.dataset.servicio);
+      const chips = [...document.querySelectorAll("#chips-necesidad .chip")];
+      const elegido = chips.find(c => norm(c.dataset.v) === buscado);
+      if (elegido) chips.forEach(c => c.classList.toggle("sel", c === elegido));
     }
   });
 
@@ -274,14 +278,13 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     });
   });
 
-  // chips selección única por grupo (necesidad admite varias; persona siempre queda una elegida)
+  // chips: una sola opción elegida por grupo (la persona siempre queda elegida)
   ["chips-necesidad", "chips-presupuesto", "chips-wa"].forEach(id => {
     const g = document.getElementById(id);
     g.addEventListener("click", e => {
       const chip = e.target.closest(".chip");
       if (!chip) return;
-      const multi = id === "chips-necesidad";
-      if (!multi) g.querySelectorAll(".chip").forEach(c => { if (c !== chip) c.classList.remove("sel"); });
+      g.querySelectorAll(".chip").forEach(c => { if (c !== chip) c.classList.remove("sel"); });
       if (id === "chips-wa") chip.classList.add("sel");
       else chip.classList.toggle("sel");
     });
