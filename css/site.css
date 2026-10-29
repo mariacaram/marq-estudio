@@ -346,7 +346,27 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   gap: clamp(1rem, 2.4vw, 2.2rem);
   margin-top: clamp(2rem, 5vw, 3.5rem);
 }
+/* Filtros de proyectos por zona */
+.proj-filtros { display: flex; flex-wrap: wrap; gap: clamp(1.2rem, 2.4vw, 2.2rem); margin-top: 1.6rem; }
+.filtro {
+  appearance: none; background: none; border: 0; font-family: inherit; cursor: pointer;
+  position: relative; padding: 0 0 0.45rem;
+  font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--ls-label);
+  text-transform: uppercase; color: var(--taupe);
+  transition: color 0.35s var(--ease-out);
+}
+.filtro:hover { color: var(--ink); }
+.filtro.sel { color: var(--ink); }
+.filtro::after {
+  content: ""; position: absolute; left: -0.35rem; right: -0.35rem; bottom: 0;
+  height: var(--irid-w); border-radius: 2px; background: var(--irid-line);
+  opacity: 0; transition: opacity 0.4s var(--ease-out);
+}
+.filtro.sel::after { opacity: 1; }
+
 .proj-card { position: relative; display: block; grid-column: span 6; }
+.proj-card.fuera { opacity: 0; transform: translateY(10px); transition: opacity 0.32s var(--ease-out), transform 0.32s var(--ease-out); }
+.proj-card.oculto { display: none; }
 .proj-card .frame {
   position: relative; overflow: clip; background: var(--line);
   aspect-ratio: 4 / 3;

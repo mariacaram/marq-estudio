@@ -650,7 +650,7 @@
       if (data.proyectos.items.some(p => p.slug === slug)) { toast("Ya existe un proyecto con ese nombre.", true); return; }
       data.proyectos.items.unshift({
         slug, titulo: nombre, categoria: "Diseño de interiores", anio: String(new Date().getFullYear()),
-        portada: "", intro: "", fotos: []
+        zona: "", portada: "", intro: "", fotos: []
       });
       markDirty();
       currentProj = slug;
@@ -672,8 +672,15 @@
           <div><label class="f">Título</label><input type="text" id="pe-titulo" value="${esc(p.titulo)}"></div>
           <div><label class="f">Año</label><input type="text" id="pe-anio" value="${esc(p.anio)}"></div>
         </div>
-        <label class="f">Categoría</label>
-        <input type="text" id="pe-cat" value="${esc(p.categoria)}">
+        <div class="row">
+          <div><label class="f">Categoría</label><input type="text" id="pe-cat" value="${esc(p.categoria)}"></div>
+          <div>
+            <label class="f">Zona</label>
+            <input type="text" id="pe-zona" value="${esc(p.zona || "")}" list="zonas-usadas" placeholder="Tucumán">
+            <datalist id="zonas-usadas">${[...new Set(data.proyectos.items.map(x => (x.zona || "").trim()).filter(Boolean))].map(z => `<option value="${esc(z)}">`).join("")}</datalist>
+          </div>
+        </div>
+        <p class="help">La zona arma los filtros de la sección Proyectos (Todos · Tucumán · …) y se muestra en la tarjeta. Escribila igual en todos los proyectos de la misma zona; si solo hay una, los filtros no aparecen.</p>
         <label class="f">Comentario de portada (se ve al abrir el proyecto)</label>
         <textarea rows="3" id="pe-intro">${esc(p.intro)}</textarea>
       </div>
@@ -701,6 +708,7 @@
     bind($("#pe-titulo"), p, "titulo");
     bind($("#pe-anio"), p, "anio");
     bind($("#pe-cat"), p, "categoria");
+    bind($("#pe-zona"), p, "zona");
     bind($("#pe-intro"), p, "intro");
 
     const fg = $("#fg");

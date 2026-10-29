@@ -32,7 +32,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg?v=6" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=29">
+<link rel="stylesheet" href="css/site.css?v=30">
 </head>
 <body>
 
@@ -78,16 +78,26 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
       <button class="hero-scroll" data-goto="#proyectos"><span>Descubrir</span><span class="line"></span></button>
     </section>`;
 
+  // Zonas: salen de los proyectos. Si no hay al menos dos distintas, no se muestran filtros.
+  const zonas = [...new Set(data.proyectos.items.map(p => (p.zona || "").trim()).filter(Boolean))];
+  const hayFiltros = zonas.length > 1;
+  const filtrosHtml = !hayFiltros ? "" : `
+          <div class="proj-filtros reveal">
+            <button type="button" class="filtro sel" data-zona="">Todos</button>
+            ${zonas.map(z => `<button type="button" class="filtro" data-zona="${escapeHtml(z)}">${escapeHtml(z)}</button>`).join("")}
+          </div>`;
+
   const projHtml = `
     <section class="section" id="proyectos">
       <div class="wrap">
         <div class="section-head">
           <p class="kicker reveal">Portfolio</p>
           <h2 class="h-section reveal">${twoTone(data.proyectos.titulo)}</h2>
+          ${filtrosHtml}
         </div>
         <div class="proj-grid">
           ${data.proyectos.items.map(p => `
-            <a class="proj-card reveal" href="proyecto.html?p=${encodeURIComponent(p.slug)}">
+            <a class="proj-card reveal" href="proyecto.html?p=${encodeURIComponent(p.slug)}" data-zona="${escapeHtml((p.zona || "").trim())}">
               <div class="frame"><img src="Proyectos/${escapeHtml(p.slug)}/${escapeHtml(p.portada)}" alt="${escapeHtml(p.titulo)}" loading="lazy"></div>
               <div class="meta"><h3>${escapeHtml(p.titulo)}</h3><span class="cat">${escapeHtml(p.categoria)} · ${escapeHtml(p.anio)}</span></div>
             </a>`).join("")}
@@ -261,6 +271,28 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
       if (elegido) chips.forEach(c => c.classList.toggle("sel", c === elegido));
     }
   });
+
+  // filtros de proyectos por zona
+  const grupoFiltros = document.querySelector(".proj-filtros");
+  if (grupoFiltros) {
+    const tarjetas = [...document.querySelectorAll(".proj-card")];
+    grupoFiltros.addEventListener("click", e => {
+      const b = e.target.closest(".filtro");
+      if (!b || b.classList.contains("sel")) return;
+      grupoFiltros.querySelectorAll(".filtro").forEach(f => f.classList.toggle("sel", f === b));
+      const z = b.dataset.zona;
+      tarjetas.forEach(c => {
+        const entra = !z || c.dataset.zona === z;
+        if (entra) {
+          c.classList.remove("oculto");
+          requestAnimationFrame(() => c.classList.remove("fuera"));
+        } else {
+          c.classList.add("fuera");
+          setTimeout(() => { if (c.classList.contains("fuera")) c.classList.add("oculto"); }, 340);
+        }
+      });
+    });
+  }
 
   // acordeón de servicios (uno abierto a la vez)
   document.querySelectorAll(".svc-row").forEach(row => {
