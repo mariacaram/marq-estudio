@@ -32,9 +32,9 @@
     ]
   },
   "estudio": {
-    "titulo": "Diseño con propósito\ny carácter propio.",
+    "titulo": "Dos miradas, un mismo criterio.",
     "parrafos": [
-      "Somos Marq., un estudio de arquitectura e interiorismo con base en Yerba Buena, Tucumán. Transformamos espacios en experiencias que inspiran y emocionan.",
+      "Somos Marq., un estudio de Yerba Buena formado por una arquitecta y una diseñadora de interiores. Mezclamos texturas, estilos y materiales, pero cada decisión tiene una razón: cómo se usa el espacio, cómo envejece el material, qué se puede resolver con lo que ya hay. Acompañamos el proyecto completo, del relevamiento a la elección del último objeto.",
       "Trabajamos con una mirada ecléctica que combina texturas, estilos y materialidades para crear ambientes únicos — lugares que se sienten, que se viven."
     ],
     "cita": "Cada proyecto es el resultado de un diálogo entre el espacio y quien lo habita.",
@@ -56,7 +56,7 @@
   },
   "servicios": {
     "titulo": "Nuestros\nservicios.",
-    "intro": "Dos modalidades proyectuales estructuradas para transformar tu forma de habitar desde cualquier lugar, con nuestra dirección técnica y estética acompañando cada decisión.",
+    "intro": "Dos programas para trabajar con nosotras aunque no estés en Tucumán. Vos medís y fotografiás; nosotras diseñamos, documentamos y te acompañamos en cada decisión.",
     "items": [
       {
         "id": "refresh",
@@ -383,7 +383,7 @@
     ]
   },
   "contacto": {
-    "titulo": "Hagamos un\ngran cambio.",
+    "titulo": "Empecemos por tu espacio.",
     "intro": "Nos encanta conocer nuevas ideas y espacios por transformar. Contanos qué tenés en mente y te respondemos por WhatsApp.",
     "necesidades": [
       "Re-styling",
