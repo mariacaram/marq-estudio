@@ -457,10 +457,14 @@
         <textarea rows="2" id="s-titulo">${esc(data.servicios.titulo)}</textarea>
         <label class="f">Introducción</label>
         <textarea rows="2" id="s-intro">${esc(data.servicios.intro)}</textarea>
+        <label class="f">Etiqueta chica (va arriba del título)</label>
+        <input type="text" id="s-kicker" value="${esc(data.servicios.kicker || "Diseños a distancia")}" list="kickers-serv" placeholder="Diseños a distancia">
+        <datalist id="kickers-serv"><option value="Diseños a distancia"><option value="En Tucumán y a distancia"><option value="Cómo trabajamos"></datalist>
       </div>
       <div id="s-items"></div>`;
     bind($("#s-titulo"), data.servicios, "titulo");
     bind($("#s-intro"), data.servicios, "intro");
+    bind($("#s-kicker"), data.servicios, "kicker");
 
     const sw = $("#s-items");
     const paint = () => {
@@ -470,6 +474,9 @@
             <div><label class="f">Nombre del programa</label><input type="text" value="${esc(s.nombre)}" data-i="${i}" data-k="nombre"></div>
             <div><label class="f">Precio "desde" (USD)</label><input type="number" value="${esc(s.desdeUSD)}" data-i="${i}" data-k="desdeUSD"></div>
           </div>
+          <label class="f">Modalidad (opcional)</label>
+          <input type="text" value="${esc(s.modalidad || "")}" data-i="${i}" data-k="modalidad" list="modalidades-usadas" placeholder="En Tucumán">
+          <p class="help">Se ve como una etiqueta chica debajo del nombre del programa. Si la dejás vacía no se muestra nada.</p>
           <label class="f">Bajada (descripción corta)</label>
           <textarea rows="2" data-i="${i}" data-k="bajada">${esc(s.bajada)}</textarea>
           <h3>¿Para quién es? (situaciones)</h3>
@@ -480,7 +487,12 @@
           <div data-list="necesitamos" data-i="${i}"></div>
           <div style="margin-top:1rem"><button type="button" class="btn danger small" data-del="${i}">Eliminar este programa</button></div>
         </div>`).join("") +
-        `<button type="button" class="btn ghost" data-add>+ Agregar programa</button>`;
+        `<datalist id="modalidades-usadas">${
+          [...new Set(["En Tucumán", "A distancia", "En Tucumán y a distancia"]
+            .concat(data.servicios.items.map(x => (x.modalidad || "").trim())).filter(Boolean))]
+            .map(m => `<option value="${esc(m)}">`).join("")
+        }</datalist>
+        <button type="button" class="btn ghost" data-add>+ Agregar programa</button>`;
       $$("[data-list]", sw).forEach(el => {
         const s = data.servicios.items[Number(el.dataset.i)];
         if (!Array.isArray(s[el.dataset.list])) s[el.dataset.list] = [];
@@ -502,7 +514,7 @@
         data.servicios.items.splice(Number(del.dataset.del), 1); paint(); markDirty();
       }
       if (e.target.closest("[data-add]")) {
-        data.servicios.items.push({ id: "nuevo-" + Date.now(), nombre: "Nuevo programa", desdeUSD: 0, bajada: "", para: [], entregables: [], necesitamos: [] });
+        data.servicios.items.push({ id: "nuevo-" + Date.now(), nombre: "Nuevo programa", modalidad: "", desdeUSD: 0, bajada: "", para: [], entregables: [], necesitamos: [] });
         paint(); markDirty();
       }
     });
@@ -680,7 +692,7 @@
             <datalist id="zonas-usadas">${[...new Set(data.proyectos.items.map(x => (x.zona || "").trim()).filter(Boolean))].map(z => `<option value="${esc(z)}">`).join("")}</datalist>
           </div>
         </div>
-        <p class="help">La zona arma los filtros de la sección Proyectos (Todos · Tucumán · …) y se muestra en la tarjeta. Escribila igual en todos los proyectos de la misma zona; si solo hay una, los filtros no aparecen.</p>
+        <p class="help">La zona arma los filtros de la sección Proyectos (Todos · Tucumán · …). Escribila igual en todos los proyectos de la misma zona; si solo hay una, los filtros no aparecen.</p>
         <label class="f">Comentario de portada (se ve al abrir el proyecto)</label>
         <textarea rows="3" id="pe-intro">${esc(p.intro)}</textarea>
       </div>

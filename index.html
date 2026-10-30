@@ -32,7 +32,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
 <link rel="icon" href="assets/brand/favicon.svg?v=6" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/canaro/Canaro-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/canaro/Canaro-Book.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=30">
+<link rel="stylesheet" href="css/site.css?v=31">
 </head>
 <body>
 
@@ -142,7 +142,7 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
     <section class="section" id="servicios">
       <div class="wrap">
         <div class="section-head">
-          <p class="kicker reveal">Diseños a distancia</p>
+          <p class="kicker reveal">${escapeHtml(data.servicios.kicker || "Diseños a distancia")}</p>
           <h2 class="h-section reveal">${twoTone(data.servicios.titulo)}</h2>
           <p class="lead reveal">${escapeHtml(data.servicios.intro)}</p>
         </div>
@@ -151,7 +151,10 @@ FORM: dirección pineada por el cliente — estética renstudio.ar traducida a C
             <article class="svc-item" id="serv-${escapeHtml(s.id)}">
               <button class="svc-row" aria-expanded="false" aria-controls="svc-body-${i}">
                 <span class="svc-num">${String(i + 1).padStart(2, "0")}</span>
-                <span class="svc-name">${escapeHtml(s.nombre)}</span>
+                <span class="svc-ident">
+                  <span class="svc-name">${escapeHtml(s.nombre)}</span>
+                  ${(s.modalidad || "").trim() ? `<span class="svc-mod">${escapeHtml(s.modalidad.trim())}</span>` : ""}
+                </span>
                 <span class="svc-desde">USD ${Number(s.desdeUSD).toLocaleString("es-AR")}</span>
                 <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></span>
               </button>

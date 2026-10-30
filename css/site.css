@@ -478,14 +478,20 @@ body.menu-open .mobile-menu a.menu-item { opacity: 1; transform: none; }
   transition: opacity 0.3s;
 }
 .svc-num { font-size: var(--fs-body); font-weight: 500; color: var(--taupe); letter-spacing: 0.08em; }
+/* El nombre y la modalidad (a distancia / en Tucuman) se mueven juntos */
+.svc-ident { display: grid; gap: 0.5rem; justify-items: start; transition: transform 0.55s var(--ease-out); }
+.svc-row:hover .svc-ident { transform: translateX(0.5rem); }
 .svc-name {
   font-weight: 300;
   font-size: var(--fs-sub);
   letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.1;
-  transition: color 0.35s, transform 0.55s var(--ease-out);
+  transition: color 0.35s;
 }
 .svc-row:hover .svc-name, .svc-item.open .svc-name { color: var(--taupe); }
-.svc-row:hover .svc-name { transform: translateX(0.5rem); }
+.svc-mod {
+  font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--ls-label);
+  text-transform: uppercase; color: var(--taupe);
+}
 .svc-desde {
   font-size: var(--fs-body); font-weight: 500; letter-spacing: 0.06em;
   color: var(--ink); white-space: nowrap;
